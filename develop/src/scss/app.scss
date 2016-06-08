@@ -1,0 +1,15 @@
+/* コメント */
+
+.c-block {
+  border-radius: 5px;
+  &.c-block--modifier {
+    background-color: #0074d9;
+  }
+  .c-block__element {
+    width: 100px;
+    &.c-block__element--modifier {
+      background-color: #006;
+    }
+  }
+}
+

@@ -1,6 +1,6 @@
 export default {
-    getId: el => {
-        const _el = document.getElementById(el);
-        return _el;
-    }
+  getId: el => {
+    const ret = document.getElementById(el);
+    return ret;
+  },
 };

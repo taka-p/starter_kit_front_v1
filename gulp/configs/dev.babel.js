@@ -1,31 +1,44 @@
 import webpack from 'webpack';
 
+// ディレクトリ,ファイル名,その他設定
 export const conf = {
-    fileName : 'app.js',             // 基点ファイル名(小規模であれば処理もまとめる)
-    destDir  : './develop/build/js', // 出力先ディレクトリ
-    srcDir   : './develop/src/js',   // リソース格納ディレクトリ
-    srcFormat: '/**/*.js'            // リソースのフォーマット
+    jsFileName : 'app.js',                   // 基点ファイル名(小規模であれば処理もまとめる)
+    jsDestDir  : './develop/build/js',       // 出力先ディレクトリ
+    jsSrcDir   : './develop/src/js',         // リソース格納ディレクトリ
+    jsSrcFormat: '/**/*.js',                 // リソースのフォーマット
+    jsSrc      : './develop/src/js/**/*.js',
+    jsUglify   : false,                      // テストでuglifyする場合はtrue
+
+    cssFileName : 'app.scss',
+    cssDestDir  : './develop/build/css/',
+    cssSrcDir   : './develop/src/scss/',
+    cssSrcFormat: '*.scss',
+    cssSrc      : './develop/src/scss/*.scss',
+    cssNano     : false, // テストでcssnanoする場合はtrue
+    browsers: [
+        // doiuse設定
+        // refs - https://github.com/ai/browserslist#queries
+        'last 3 version',
+        'ios >= 4',
+        'android >= 2.3'
+    ],
+    ignores: [
+        // doiuse設定から弾く
+        // 'transforms2d'
+    ]
 };
 
+// webpackの設定
 export const setting = {
-    // リソース
-    src: conf.srcDir + conf.srcFormat,
-    // jsのビルド設定
-    js: {
-        dest: conf.destDir
-        // uglify: false
-    },
-    // webpackの設定
     webpack: {
-        entry: conf.srcDir + '/' + conf.fileName,
+        entry: conf.jsSrcDir + '/' + conf.jsFileName,
         output: {
-            filename: conf.fileName
+            filename: conf.jsFileName
         },
         resolve: {
             extensions: ['', '.js'],
             modulesDirectories: ['node_modules', 'bower_components'],
-            alias: {
-            }
+            alias: {}
         },
         plugins: [
             new webpack.ResolverPlugin(

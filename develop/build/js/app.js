@@ -53,9 +53,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	window.onload = function () {
-	    var dom = _alias2.default.getId('dom');
-	    dom.innerHTML = 'Hello World!';
-	    console.log(dom);
+	  var dom = _alias2.default.getId('dom');
+	  dom.innerHTML = 'Hello World!';
 	};
 
 /***/ },
@@ -65,14 +64,15 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	exports.default = {
-	    getId: function getId(el) {
-	        var _el = document.getElementById(el);
-	        return _el;
-	    }
+	  getId: function getId(el) {
+	    var ret = document.getElementById(el);
+	    return ret;
+	  }
 	};
 
 /***/ }
 /******/ ]);
+//# sourceMappingURL=app.js.map
