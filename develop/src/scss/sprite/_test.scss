@@ -1,0 +1,42 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet: width height image $spritesheet-sprites;
+*/
+$github-name: 'github';
+$github-x: 0px;
+$github-y: 0px;
+$github-offset-x: 0px;
+$github-offset-y: 0px;
+$github-width: 256px;
+$github-height: 256px;
+$github-total-width: 440px;
+$github-total-height: 256px;
+$github-image: '../img/sprite/test.png';
+$github: (0px, 0px, 0px, 0px, 256px, 256px, 440px, 256px, '../img/sprite/test.png', 'github', );
+$qiita-name: 'qiita';
+$qiita-x: 260px;
+$qiita-y: 0px;
+$qiita-offset-x: -260px;
+$qiita-offset-y: 0px;
+$qiita-width: 180px;
+$qiita-height: 180px;
+$qiita-total-width: 440px;
+$qiita-total-height: 256px;
+$qiita-image: '../img/sprite/test.png';
+$qiita: (260px, 0px, -260px, 0px, 180px, 180px, 440px, 256px, '../img/sprite/test.png', 'qiita', );
+$spritesheet-width: 440px;
+$spritesheet-height: 256px;
+$spritesheet-image: '../img/sprite/test.png';
+$spritesheet-sprites: ($github, $qiita, );
+$spritesheet: (440px, 256px, '../img/sprite/test.png', $spritesheet-sprites, );
+
+

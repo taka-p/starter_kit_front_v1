@@ -1,6 +1,14 @@
 // airbnb-base
 // https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base
+// カスタマイズ(上書き)して利用
 
 {
-  "extends": "airbnb-base"
+  "globals": {
+    "_": true,
+    "$": true
+  },
+  "extends": "airbnb-base",
+  "rules": {
+    //    "comma-dangle": 0
+  }
 }
