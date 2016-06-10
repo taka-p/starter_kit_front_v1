@@ -24,8 +24,11 @@
 - 拡張子の変更`scss -> css`
 - sourcemapの出力
 
-### prod - 本番リリース用(準備中)
+### prod - 本番リリース用
 `gulp prod`で下記のタスクを実行します。
+
+**全般**
+- `product`ディレクトリを空にする（ゴミファイル対策）
 
 **JS**
 - eslintによる構文解析
@@ -39,20 +42,13 @@
 - stylelintによる構文解析
 - libsassによるSassプリコンパイル
 - postcss-autoprefixerによるベンダープレフィックス付与
-- postcss-douiseによるプロパティチェック（ブラウザサポート）
 - 拡張子の変更`scss -> css`
 - cssnanoによる最適化(css版のuglify)
 - `product/css/`に配置
 
 **画像**
-- gulp-image-optimによって最適化
+- gulp-imageminによって圧縮(optimizationLevel:7)
 - 次のようにコピーされる`develop/build/img/* -> product/img/*`
-
-### clean
-2回目以降のリリースに利用して下さい。（ゴミファイル対策）
-`gulp clean`で下記のタスクを実行します。
-- `product/js, css, img`の中を空にする
-
 
 ### sprite - スプライト画像の作成
 `gulp sprite`で下記のタスクを実行します。
