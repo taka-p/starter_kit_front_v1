@@ -1,75 +1,39 @@
-/* コメント */
-
-.c-block {
-  border-radius: 5px;
-  &.c-block--modifier {
-    background-color: #0074d9;
-  }
-  .c-block__element {
-    width: 100px;
-    &.c-block__element--modifier {
-      background-color: #006;
-    }
-  }
-}
+/**
+ * import基点ファイル
+ * ここではスタイルを定義しない
+ * 大規模なアプリケーションではCompositionレイヤーを利用
+ */
 
 
-@import 'sprite/_test.scss';
+// パーシャルファイルのimport
+/* Vendor */
+@import 'vendor/_test.scss',
 
-@mixin sprite-width($sprite) {
-  width: nth($sprite, 5);
-}
+/* Foundation */
+        'foundation/_reset.scss',
+        'foundation/_base.scss',
+        'foundation/mixin/_sprite.scss',
+        'foundation/variables/_variables.scss',
+        'foundation/variables/sprite/_test.scss',
 
-@mixin sprite-height($sprite) {
-  height: nth($sprite, 6);
-}
+/* Layout */
+        'layout/_header.scss',
+        'layout/_footer.scss',
+        'layout/_main.scss',
+        'layout/_sidebar.scss',
 
-@mixin sprite-position($sprite) {
-  $sprite-offset-x: nth($sprite, 3);
-  $sprite-offset-y: nth($sprite, 4);
-  background-position: $sprite-offset-x  $sprite-offset-y;
-}
+/* Object - Component */
+        'object/component/_button.scss',
+        'object/component/_dialog.scss',
+        'object/component/_grid.scss',
+        'object/component/_media.scss',
+        'object/component/_icon.scss',
 
-@mixin sprite-image($sprite) {
-  $sprite-image: nth($sprite, 9);
-  background-image: url($sprite-image);
-}
+/* Object - Project */
+        'object/project/_articles.scss',
+        'object/project/_comments.scss',
+        'object/project/_gallery.scss',
+        'object/project/_profile.scss',
 
-@mixin sprite($sprite) {
-  @include sprite-image($sprite);
-  @include sprite-position($sprite);
-  @include sprite-width($sprite);
-  @include sprite-height($sprite);
-}
-
-@mixin r-sprite-width($sprite) {
-  width: nth($sprite, 5)/2;
-}
-
-@mixin r-sprite-height($sprite) {
-  height: nth($sprite, 6)/2;
-}
-
-@mixin r-sprite-position($sprite) {
-  $sprite-offset-x: nth($sprite, 3)/2;
-  $sprite-offset-y: nth($sprite, 4)/2;
-  background-position: $sprite-offset-x  $sprite-offset-y;
-}
-
-@mixin r-sprite-size($sprite) {
-  background-size: nth($sprite, 7)/2 nth($sprite, 8)/2;
-}
-
-@mixin r-sprite($sprite) {
-  @include sprite-image($sprite);
-  @include r-sprite-position($sprite);
-  @include r-sprite-width($sprite);
-  @include r-sprite-height($sprite);
-  @include r-sprite-size($sprite);
-}
-
-.c-ico-github {
-  @include r-sprite($qiita);
-  display: block;
-}
-
+/* Object - Utility */
+        'object/utility/_utility.scss';

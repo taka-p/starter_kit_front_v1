@@ -1,14 +1,63 @@
 @charset "UTF-8";
-/* コメント */
-.c-block {
-  border-radius: 5px; }
-  .c-block.c-block--modifier {
-    background-color: #0074d9; }
-  .c-block .c-block__element {
-    width: 100px; }
-    .c-block .c-block__element.c-block__element--modifier {
-      background-color: #006; }
+/**
+ * import基点ファイル
+ * ここではスタイルを定義しない
+ * 大規模なアプリケーションではCompositionレイヤーを利用
+ */
+/* Vendor */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
 
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/**
+ * スプライト画像読み込む用のmixinを定義
+ * ex. @include r-sprite($something);
+ */
+/* 非Ratina用のmixin群 */
+/* Ratina用のmixin群 */
 /*
 SCSS variables are information about icon's compiled state, stored under its original file name
 
@@ -22,11 +71,16 @@ $icon-home: x y offset_x offset_y width height total_width total_height image_pa
 At the bottom of this section, we provide information about the spritesheet itself
 $spritesheet: width height image $spritesheet-sprites;
 */
-.c-ico-github {
+/**
+ * 汎用的に利用出来るアイコンを定義
+ * prefix - 'c-ico-'
+ * ex: .c-ico__github
+ */
+.c-ico__github {
   background-image: url("../img/sprite/test.png");
-  background-position: -130px 0px;
-  width: 90px;
-  height: 90px;
+  background-position: 0px 0px;
+  width: 128px;
+  height: 128px;
   -webkit-background-size: 220px 128px;
           background-size: 220px 128px;
   display: block; }

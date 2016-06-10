@@ -13,7 +13,7 @@ export const conf = {
     cssDestDir  : './develop/build/css/',
     cssSrcDir   : './develop/src/scss/',
     cssSrcFormat: '*.scss',
-    cssSrc      : './develop/src/scss/*.scss',
+    cssSrc      : './develop/src/scss/**/*.scss',
     cssNano     : false, // テストでcssnanoする場合はtrue
     browsers: [
         // doiuse設定
@@ -24,7 +24,7 @@ export const conf = {
     ],
     ignores: [
         // doiuse設定から弾く
-        // 'transforms2d'
+        'background-img-opts'
     ]
 };
 

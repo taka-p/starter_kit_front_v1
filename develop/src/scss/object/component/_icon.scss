@@ -1,0 +1,10 @@
+/**
+ * 汎用的に利用出来るアイコンを定義
+ * prefix - 'c-ico-'
+ * ex: .c-ico__github
+ */
+
+.c-ico__github {
+  @include r-sprite($github);
+  display: block;
+}

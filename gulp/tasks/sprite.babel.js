@@ -56,6 +56,6 @@ gulp.task('sprite', function () {
             }));
 
         spriteData.img.pipe(gulp.dest(dir.dest + '/' + dir.img + '/' + dir.sprite));
-        spriteData.css.pipe(gulp.dest(dir.src + '/' + dir.scss + '/' + dir.sprite));
+        spriteData.css.pipe(gulp.dest(dir.src + '/' + dir.scss + '/' + 'foundation/variables' + '/' + dir.sprite));
     });
 });
