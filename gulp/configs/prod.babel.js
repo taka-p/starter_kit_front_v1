@@ -3,29 +3,28 @@ import webpack from 'webpack';
 // ディレクトリ,ファイル名,その他設定
 export const conf = {
     jsFileName : 'app.js',                   // 基点ファイル名(小規模であれば処理もまとめる)
-    jsDestDir  : './develop/build/js',       // 出力先ディレクトリ
+    jsDestDir  : './product/js',             // 出力先ディレクトリ
     jsSrcDir   : './develop/src/js',         // リソース格納ディレクトリ
     jsSrcFormat: '/**/*.js',                 // リソースのフォーマット
     jsSrc      : './develop/src/js/**/*.js',
-    jsUglify   : false,                      // テストでuglifyする場合はtrue
+    jsUglify   : true,                       // uglifyしない場合はfalse
 
     cssFileName : 'app.scss',
-    cssDestDir  : './develop/build/css/',
+    cssDestDir  : './product/css/',
     cssSrcDir   : './develop/src/scss/',
-    cssSrcFormat: '*.scss',
+    cssSrcFormat: '/**/*.scss',
     cssSrc      : './develop/src/scss/**/*.scss',
-    cssNano     : false, // テストでcssnanoする場合はtrue
+    cssNano     : true, // テストでcssnanoしない場合はfalse
     browsers: [
-        // doiuse,autoprefixer設定 - https://github.com/ai/browserslist#queries
+        // autoprefixer設定
         // 国内端末シェア - http://smatabinfo.jp/index.html
         'last 2 version',
         'ios >= 5',
         'android >= 4'
     ],
-    ignores: [
-        // doiuse設定から弾く
-        'background-img-opts'
-    ]
+
+    imgSrcDir : './develop/build/img',
+    imgDestDir: './product/img'
 };
 
 // webpackの設定
