@@ -1,9 +1,10 @@
 /**
+ * mixin/_sprite.scss
  * スプライト画像読み込む用のmixinを定義
  * ex. @include r-sprite($something);
  */
 
-/* 非Ratina用のmixin群 */
+// 非Ratina用のmixin群
 @mixin sprite-width($sprite) {
   width: nth($sprite, 5);
 }
@@ -30,7 +31,7 @@
   @include sprite-height($sprite);
 }
 
-/* Ratina用のmixin群 */
+// Ratina用のmixin群
 @mixin r-sprite-width($sprite) {
   width: nth($sprite, 5)/2;
 }
