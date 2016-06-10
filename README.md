@@ -52,7 +52,7 @@
 
 ### sprite - スプライト画像の作成
 `gulp sprite`で下記のタスクを実行します。
-- `develop/build/img/sprite/\*\*/*.png`を再帰的に読み込む
+- `develop/build/img/sprite/**/*.png`を再帰的に読み込む
 - 上記で得られた画像群からスプライト画像を生成、スプライト画像はsprite/直下に`dirname.png`という名称で配置される
 - スプライト画像を読み込むための変数/関数群は`develop/src/scss/fonundation/variables/sprite/`配下に`_dirname.scss`という名称で配置される
 - スプライト画像を利用する際は、事前にimport基点ファイル`app.scss`などに`_dirname.scss`読み込んで利用する
