@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 
 // ディレクトリ,ファイル名,その他設定
+// todo: constで宣言して変数を使い回せるようにする
 export const conf = {
     jsFileName : 'app.js',                   // 基点ファイル名(小規模であれば処理もまとめる)
     jsDestDir  : './product/js',             // 出力先ディレクトリ
