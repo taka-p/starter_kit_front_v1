@@ -1,0 +1,32 @@
+/**
+ * _example.scss
+ * 後から参照したい記法のメモ
+ */
+
+/* case1
+-before-
+.block {
+  background-color: black;
+  & &__element {
+    background-color: red;
+  }
+}
+
+-after-
+.block { background-color: black; }
+.block .block__element { background-color: tomato; }
+*/
+
+/* case2
+-before-
+.block {
+  background-color: black;
+  &__element {
+    background-color: red;
+  }
+}
+
+-after-
+.block { background-color: black; }
+.block__element { background-color: tomato; }
+*/
