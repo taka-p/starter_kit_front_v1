@@ -16,11 +16,11 @@ export const conf = {
     cssSrc      : './develop/src/scss/**/*.scss',
     cssNano     : false, // テストでcssnanoする場合はtrue
     browsers: [
-        // doiuse設定
-        // refs - https://github.com/ai/browserslist#queries
-        'last 3 version',
-        'ios >= 4',
-        'android >= 2.3'
+        // doiuse設定 - https://github.com/ai/browserslist#queries
+        // 国内端末シェア - http://smatabinfo.jp/index.html
+        'last 2 version',
+        'ios >= 5',
+        'android >= 4'
     ],
     ignores: [
         // doiuse設定から弾く

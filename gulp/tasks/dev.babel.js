@@ -48,7 +48,7 @@ gulp.task('js', () => {
 // todo: SVGからiconFont生成
 gulp.task('css', () => {
     const processors = [
-              stylelint(stylelintrc),
+              // stylelint(stylelintrc),
               doiuse({ browsers: conf.browsers, ignore: conf.ignores }),
               autoprefixer({ browsers: conf.browsers }),
               reporter()

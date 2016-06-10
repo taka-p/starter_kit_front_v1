@@ -1,14 +1,20 @@
 @charset "UTF-8";
 /**
+ * app.scss
  * import基点ファイル
  * ここではスタイルを定義しない
  * 大規模なアプリケーションではCompositionレイヤーを利用
  */
 /* Vendor */
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+/**
+ * _reset.scss
+ * ここではスタイルを編集しない
+ * ベースとなるスタイルを編集したい場合は_base.scssで行う
+ *
+ * http://meyerweb.com/eric/tools/css/reset/
+ * v2.0 | 20110126
+ * License: none (public domain)
+ */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -53,11 +59,20 @@ table {
   border-spacing: 0; }
 
 /**
+ * _base.scss
+ * html要素への直接的なスタイル指定を定義
+ * 固有のスタイルはここに定義しない
+ */
+/**
+ * mixin/_sprite.scss
  * スプライト画像読み込む用のmixinを定義
  * ex. @include r-sprite($something);
  */
-/* 非Ratina用のmixin群 */
-/* Ratina用のmixin群 */
+/**
+ * variable/_variable.scss
+ * 共用の変数を定義
+ * 固有の変数はここに定義しない
+ */
 /*
 SCSS variables are information about icon's compiled state, stored under its original file name
 
@@ -72,6 +87,7 @@ At the bottom of this section, we provide information about the spritesheet itse
 $spritesheet: width height image $spritesheet-sprites;
 */
 /**
+ * _icon.scss
  * 汎用的に利用出来るアイコンを定義
  * prefix - 'c-ico-'
  * ex: .c-ico__github
@@ -81,8 +97,396 @@ $spritesheet: width height image $spritesheet-sprites;
   background-position: 0px 0px;
   width: 128px;
   height: 128px;
-  -webkit-background-size: 220px 128px;
-          background-size: 220px 128px;
+  background-size: 220px 128px;
   display: block; }
+
+/**
+ * _utility.scss
+ * helperクラスを定義
+ * 共通化出来そうな場合はcomponent,projectにスタイルを定義する
+ * 共通化出来そうにない場合は積極的に利用する
+ * 極力利用しない方が良いクラスには[注意]と表記
+ */
+/* Clearfix */
+.u-cf:before,
+.u-cf:after {
+  content: "";
+  display: table !important; }
+
+.u-cf:after {
+  clear: both; }
+
+/* Ellipsis */
+.u-elps-1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+
+.u-elps-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; }
+
+.u-elps-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; }
+
+.u-elps-4 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; }
+
+.u-elps-5 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5; }
+
+/* Fade hover, active */
+.u-fade--hover {
+  -webkit-transition: opacity .3s linear;
+  transition: opacity .3s linear; }
+  .u-fade--hover:hover {
+    opacity: .6; }
+
+.u-fade--active {
+  -webkit-transition: opacity .3s linear;
+  transition: opacity .3s linear; }
+  .u-fade--active:active {
+    opacity: .6; }
+
+/* State - JSで利用する共用のクラス */
+.u-is-hide {
+  display: none; }
+
+.u-is-show {
+  display: block; }
+
+/* Float - [注意] */
+.u-fl {
+  float: left !important; }
+
+.u-fr {
+  float: right !important; }
+
+/* Display - [注意] */
+.u-dn {
+  display: none !important; }
+
+.u-db {
+  display: block !important; }
+
+.u-di {
+  display: inline !important; }
+
+.u-dib {
+  display: inline-block !important; }
+
+.u-dt {
+  display: table !important; }
+
+.u-dc {
+  display: table-cell !important; }
+
+/* TextAlign */
+.u-tal {
+  text-align: left !important; }
+
+.u-tac {
+  text-align: center !important; }
+
+.u-tar {
+  text-align: right !important; }
+
+/* VerticalAlign */
+.u-vat {
+  vertical-align: top; }
+
+.u-vam {
+  vertical-align: middle; }
+
+.u-vab {
+  vertical-align: bottom; }
+
+.u-va0 {
+  vertical-align: 0; }
+
+.u-va1 {
+  vertical-align: -1px; }
+
+.u-va2 {
+  vertical-align: -2px; }
+
+.u-va3 {
+  vertical-align: -3px; }
+
+.u-va4 {
+  vertical-align: -4px; }
+
+.u-va5 {
+  vertical-align: -5px; }
+
+/* Spacing margin, padding */
+.u-m0 {
+  margin: 0 !important; }
+
+.u-mt0 {
+  margin: 0 !important; }
+
+.u-mr0 {
+  margin: 0 !important; }
+
+.u-mb0 {
+  margin: 0 !important; }
+
+.u-ml0 {
+  margin: 0 !important; }
+
+.u-p0 {
+  margin: 0 !important; }
+
+.u-pt0 {
+  margin: 0 !important; }
+
+.u-pr0 {
+  margin: 0 !important; }
+
+.u-pb0 {
+  margin: 0 !important; }
+
+.u-pl0 {
+  margin: 0 !important; }
+
+.u-m5 {
+  margin: 5px !important; }
+
+.u-mt5 {
+  margin: 5px !important; }
+
+.u-mr5 {
+  margin: 5px !important; }
+
+.u-mb5 {
+  margin: 5px !important; }
+
+.u-ml5 {
+  margin: 5px !important; }
+
+.u-p5 {
+  margin: 5px !important; }
+
+.u-pt5 {
+  margin: 5px !important; }
+
+.u-pr5 {
+  margin: 5px !important; }
+
+.u-pb5 {
+  margin: 5px !important; }
+
+.u-pl5 {
+  margin: 5px !important; }
+
+.u-m10 {
+  margin: 10px !important; }
+
+.u-mt10 {
+  margin: 10px !important; }
+
+.u-mr10 {
+  margin: 10px !important; }
+
+.u-mb10 {
+  margin: 10px !important; }
+
+.u-ml10 {
+  margin: 10px !important; }
+
+.u-p10 {
+  margin: 10px !important; }
+
+.u-pt10 {
+  margin: 10px !important; }
+
+.u-pr10 {
+  margin: 10px !important; }
+
+.u-pb10 {
+  margin: 10px !important; }
+
+.u-pl10 {
+  margin: 10px !important; }
+
+.u-m15 {
+  margin: 15px !important; }
+
+.u-mt15 {
+  margin: 15px !important; }
+
+.u-mr15 {
+  margin: 15px !important; }
+
+.u-mb15 {
+  margin: 15px !important; }
+
+.u-ml15 {
+  margin: 15px !important; }
+
+.u-p15 {
+  margin: 15px !important; }
+
+.u-pt15 {
+  margin: 15px !important; }
+
+.u-pr15 {
+  margin: 15px !important; }
+
+.u-pb15 {
+  margin: 15px !important; }
+
+.u-pl15 {
+  margin: 15px !important; }
+
+.u-m20 {
+  margin: 20px !important; }
+
+.u-mt20 {
+  margin: 20px !important; }
+
+.u-mr20 {
+  margin: 20px !important; }
+
+.u-mb20 {
+  margin: 20px !important; }
+
+.u-ml20 {
+  margin: 20px !important; }
+
+.u-p20 {
+  margin: 20px !important; }
+
+.u-pt20 {
+  margin: 20px !important; }
+
+.u-pr20 {
+  margin: 20px !important; }
+
+.u-pb20 {
+  margin: 20px !important; }
+
+.u-pl20 {
+  margin: 20px !important; }
+
+.u-m25 {
+  margin: 25px !important; }
+
+.u-mt25 {
+  margin: 25px !important; }
+
+.u-mr25 {
+  margin: 25px !important; }
+
+.u-mb25 {
+  margin: 25px !important; }
+
+.u-ml25 {
+  margin: 25px !important; }
+
+.u-p25 {
+  margin: 25px !important; }
+
+.u-pt25 {
+  margin: 25px !important; }
+
+.u-pr25 {
+  margin: 25px !important; }
+
+.u-pb25 {
+  margin: 25px !important; }
+
+.u-pl25 {
+  margin: 25px !important; }
+
+.u-m30 {
+  margin: 30px !important; }
+
+.u-mt30 {
+  margin: 30px !important; }
+
+.u-mr30 {
+  margin: 30px !important; }
+
+.u-mb30 {
+  margin: 30px !important; }
+
+.u-ml30 {
+  margin: 30px !important; }
+
+.u-p30 {
+  margin: 30px !important; }
+
+.u-pt30 {
+  margin: 30px !important; }
+
+.u-pr30 {
+  margin: 30px !important; }
+
+.u-pb30 {
+  margin: 30px !important; }
+
+.u-pl30 {
+  margin: 30px !important; }
+
+/* FontSize */
+.u-fs-m {
+  font-size: 16px; }
+
+.u-fs-s1 {
+  font-size: 8px; }
+
+.u-fs-s2 {
+  font-size: 10px; }
+
+.u-fs-s3 {
+  font-size: 12px; }
+
+.u-fs-s4 {
+  font-size: 14px; }
+
+.u-fs-l1 {
+  font-size: 18px; }
+
+.u-fs-l2 {
+  font-size: 20px; }
+
+.u-fs-l3 {
+  font-size: 22px; }
+
+.u-fs-l4 {
+  font-size: 24px; }
+
+/* FontWeight, Style */
+.u-fwn {
+  font-weight: normal !important; }
+
+.u-fwb {
+  font-weight: bold !important; }
+
+.u-fsty-i {
+  font-style: italic !important; }
+
+/* TextDecoration */
+.u-tdn {
+  text-decoration: none !important; }
+
+.u-tdu {
+  text-decoration: underline !important; }
+
+.u-tdl {
+  text-decoration: line-through !important; }
 
 /*# sourceMappingURL=app.css.map */

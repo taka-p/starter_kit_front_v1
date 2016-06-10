@@ -3,3 +3,78 @@
  * 共用の変数を定義
  * 固有の変数はここに定義しない
  */
+
+
+// Base
+$base_bg_color   : #f9f9f9;
+$base_brand_color: #2244aa;
+$base_font_color : #3a3a3a;
+$base_link_color : #6cc6e4;
+
+// SiteColor
+//$color_hoge: #000;
+
+// Bootstrap BrandColor
+$bs_color_primary: #337ab7;
+$bs_color_success: #5cb85c;
+$bs_color_info   : #5bc0de;
+$bs_color_warning: #f0ad4e;
+$bs_color_danger : #d9534f;
+// Bootstrap BgColor
+$bs_bg_color_success: #dff0d8;
+$bs_bg_color_info   : #d9edf7;
+$bs_bg_color_warning: #fcf8e3;
+$bs_bg_color_danger : #f2dede;
+// Bootstrap FontColor
+$bs_font_color_success: #3c763d;
+$bs_font_color_info   : #31708f;
+$bs_font_color_warning: #8a6d3b;
+$bs_font_color_danger : #a94442;
+// Bootstrap BorderColor
+$bs_bd_color_success  : #d6e9c6;
+$bs_font_color_info   : #bce8f1;
+$bs_font_color_warning: #faebcc;
+$bs_font_color_danger : #ebccd1;
+
+
+// FontSize
+$font_size_base: 16px;
+$font_size_m : $font_size_base;
+$font_size_s1: $font_size_base - 8;
+$font_size_s2: $font_size_base - 6;
+$font_size_s3: $font_size_base - 4;
+$font_size_s4: $font_size_base - 2;
+$font_size_l1: $font_size_base + 2;
+$font_size_l2: $font_size_base + 4;
+$font_size_l3: $font_size_base + 6;
+$font_size_l4: $font_size_base + 8;
+// $font_size_xl1: $font_size_base + 10;
+// クラス生成用の配列
+$font_size_s_arr:
+        $font_size_s1,
+        $font_size_s2,
+        $font_size_s3,
+        $font_size_s4;
+$font_size_l_arr:
+        $font_size_l1,
+        $font_size_l2,
+        $font_size_l3,
+        $font_size_l4;
+
+
+// BreakPoints (bootstrap)
+$sp_screen: 768px;
+$tb_screen: 992px;
+$pc_screen: 1200px;
+
+
+// z-index
+$zindex_level0: 0;
+$zindex_level1: 1;
+$zindex_level2: 10;
+$zindex_level3: 100;
+$zindex_level4: 1000;
+$zindex_level5: 10000;   // 以降はユーザの操作を中断するUIに利用
+$zindex_level6: 100000;
+$zindex_level7: 1000000;
+$zindex_level_minus: -1; // どうしても解決出来ない場合のみ利用
