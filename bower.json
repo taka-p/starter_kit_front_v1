@@ -1,0 +1,17 @@
+{
+  "name": "front_ver1",
+  "description": "フロントエンド用開発環境（詳しくはREADME参照）",
+  "main": "index.js",
+  "authors": [
+    "TakashiSato"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/taka-p/starter_kit_front_v1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

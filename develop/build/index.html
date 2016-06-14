@@ -9,5 +9,32 @@
 <body>
     <div id="dom"></div>
     <i class="c-ico__github"></i>
+
+    <div class="row">
+        <div class="col">
+            <label for="">アカウントを作成</label>
+        </div>
+        <div class="col">
+            <input type="text" placeholder="4文字以上8文字以内で入力してください" data-minlength="4" data-maxlength="8" required>
+            <ul>
+                <li data-error="required">必須項目です</li>
+                <li data-error="minlength">4文字以上で入力してください</li>
+                <li data-error="maxlength">8文字以内で入力してください</li>
+            </ul>
+        </div>
+
+        <div class="col">
+            <label for="">パスワードを作成</label>
+        </div>
+        <div class="col">
+            <input type="text" placeholder="4文字以上8文字以内で入力してください" data-minlength="4" data-maxlength="8" required>
+            <ul>
+                <li data-error="required">必須項目です</li>
+                <li data-error="minlength">4文字以上で入力してください</li>
+                <li data-error="maxlength">8文字以内で入力してください</li>
+            </ul>
+        </div>
+    </div>
+    </div>
 </body>
 </html>
