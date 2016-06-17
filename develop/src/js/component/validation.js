@@ -3,9 +3,7 @@
  * input,select要素に対してバリデーションを行い、エラーの表示/非表示を制御
  */
 
-import $ from '../../../../bower_components/jquery/dist/jquery';
-
-export function ValidModel(attrs) {
+function ValidModel(attrs) {
   this.val = "";
   this.attrs = {
     required : attrs.required  || false,
@@ -25,8 +23,8 @@ ValidModel.prototype.on = function (event, func) {
 
 // オブザーバー機能 - イベントの発火メソッド
 ValidModel.prototype.trigger = function (event) {
-  $.each(this.listenners[event], function () {
-    this();
+  this.listenners[event].forEach(function (fn) {
+    fn();
   });
 };
 
@@ -72,22 +70,22 @@ ValidModel.prototype.validate = function () {
 /**
  * viewコンストラクタ
  */
-export function ValidView(el) {
+export default function ValidView(el) {
   this.initialize(el);
   this.handleEvents();
 }
 
 // インスタンスから初期化メソッドを実行(引数としてinput要素を渡す)
 ValidView.prototype.initialize = function (el) {
-  this.$el   = $(el);
-  this.$list = this.$el.next().children();
+  this.el = el;
+  this.list = el.nextElementSibling.children;
 
   // 要素のdata属性を取得
-  var obj = this.$el.data();
+  var obj = this.el.dataset;
 
   // required属性が存在する場合は先ほどのobjにマージ
-  if (this.$el.prop("required")) {
-    obj["required"] = "";
+  if (this.el.required) {
+    obj['required'] = '';
   }
 
   // ValidViewからValidModelのメソッドを呼び出せるようにする
@@ -100,7 +98,7 @@ ValidView.prototype.handleEvents = function () {
 
   // keyuoイベントのハンドラとしてonKeyupを登録
   // イベント発火時にイベントオブジェクトeを受け取る
-  this.$el.on("keyup", function (e) {
+  this.el.addEventListener('keyup', function(e) {
     that.onKeyup(e);
   });
 
@@ -115,22 +113,36 @@ ValidView.prototype.handleEvents = function () {
 };
 
 ValidView.prototype.onKeyup = function (e) {
-  var $target = $(e.currentTarget);
+  var target = e.currentTarget;
   // inputの値をmodelにセットする
-  this.model.set($target.val());
+  this.model.set(target.value);
 };
 
 ValidView.prototype.onValid = function () {
-  this.$el.removeClass("error");
-  this.$list.hide();
+  this.el.classList.remove('error');
+
+  var listEach = [].forEach.bind(this.list);
+  listEach(function(item) {
+    item.style.display = 'none';
+  });
+
 };
 
 ValidView.prototype.onInvalid = function () {
   var that = this;
-  this.$el.addClass("error");
-  this.$list.hide();
 
-  $.each(this.model.errors, function (index, val) {
-    that.$list.filter("[data-error=\"" + val + "\"]").show();
+  this.el.classList.add('error');
+
+  var listEach = [].forEach.bind(this.list);
+  listEach(function(item) {
+    item.style.display = 'none';
+  });
+
+  this.model.errors.forEach(function (val) {
+    listEach(function (item) {
+      if (item.dataset['error'] == val) {
+        item.style.display = 'block';
+      }
+    });
   });
 };

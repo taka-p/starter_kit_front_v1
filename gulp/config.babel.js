@@ -9,6 +9,7 @@ export default {
   jsSrc        : './develop/src/js/**/*.js',
   jsUglifyDev  : false, // テストでuglifyする場合はtrue
   jsUglifyProd : true,  // テストでuglifyしない場合はfalse
+  jsGzipProd   : true,  // テストでuglifyしない場合はfalse
 
   // css config
   cssDestDirDev : './develop/build/css/',
@@ -16,6 +17,7 @@ export default {
   cssSrc        : './develop/src/scss/**/*.scss',
   cssNanoDev    : false, // テストでcssnanoする場合はtrue
   cssNanoProd   : true,  // テストでcssnanoしない場合はfalse
+  cssGzipProd   : true,  // テストでcssnanoしない場合はfalse
   browsers: [
     // doiuse,autoprefixer設定 - https://github.com/ai/browserslist#queries
     // 国内端末シェア - http://smatabinfo.jp/index.html

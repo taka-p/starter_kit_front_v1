@@ -23,10 +23,10 @@ import doiuse       from 'doiuse'; // クロスブラウザチェック
 import cssnano      from 'cssnano';
 
 /* img plugin */
-import imagemin from 'gulp-imagemin';
+import imagemin    from 'gulp-imagemin';
 import spritesmith from 'gulp.spritesmith';
-import fs from 'fs';
-import path from 'path';
+import fs          from 'fs';
+import path        from 'path';
 
 /* common plugin */
 import rename     from 'gulp-rename';
@@ -35,6 +35,7 @@ import plumber    from 'gulp-plumber';
 import notify     from 'gulp-notify';
 import gulpif     from 'gulp-if';
 import del        from 'del';
+import gzip       from 'gulp-gzip';
 
 /* config */
 import conf    from './gulp/config.babel';
@@ -115,11 +116,23 @@ gulp.task('jsProd', () => {
     .pipe(webpack(setting.webpack))
     // uglifyしたくない場合はconfigでfalseに変更
     .pipe(gulpif(conf.jsUglifyProd, uglify()))
-    .pipe(gulpif(conf.jsUglifyProd, rename(path => {
-      path.extname = '.min.js';
-    })))
+    // .pipe(gulpif(conf.jsUglifyProd, rename(path => {
+    //   path.extname = '.min.js';
+    // })))
     .pipe(gulp.dest(conf.jsDestDirProd))
     .pipe(notify('Js Finished'));
+});
+
+gulp.task('jsProdGzip', () => {
+  gulp.src(conf.jsSrc)
+    .pipe(plumber({
+      errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
+    }))
+    .pipe(webpack(setting.webpack))
+    // uglifyしたくない場合はconfigでfalseに変更
+    .pipe(gulpif(conf.jsGzipProd, gzip()))
+    .pipe(gulp.dest(conf.jsDestDirProd))
+    .pipe(notify('JsGzip Finished'));
 });
 
 gulp.task('cssProd', () => {
@@ -138,13 +151,27 @@ gulp.task('cssProd', () => {
     }))
     .pipe(sass())
     .pipe(postcss(processors))
-    .pipe(rename(path => {
-      if (conf.cssNanoProd) {
-        path.extname = '.min.css';
-      } else {
-        path.extname = '.css';
-      }
+    .pipe(gulp.dest(conf.cssDestDirProd))
+    .pipe(notify('Scss Finished'));
+});
+
+gulp.task('cssProdGzip', () => {
+  const processors = [
+    autoprefixer({browsers: conf.browsers})
+  ];
+
+  // cssnanoしたくない場合はconfigでfalseに変更
+  if (conf.cssNanoProd) {
+    processors.push(cssnano({autoprefixer: false}));
+  }
+
+  return gulp.src(conf.cssSrc)
+    .pipe(plumber({
+      errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
     }))
+    .pipe(sass())
+    .pipe(postcss(processors))
+    .pipe(gulpif(conf.jsGzipProd, gzip()))
     .pipe(gulp.dest(conf.cssDestDirProd))
     .pipe(notify('Scss Finished'));
 });
@@ -162,6 +189,16 @@ gulp.task('imgProd', () => {
     .pipe(notify('Img Finished'));
 });
 
+gulp.task('htmlProdGzip', () => {
+  gulp.src('./develop/build/index.html')
+    .pipe(plumber({
+      errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
+    }))
+    .pipe(gulpif(true, gzip()))
+    .pipe(gulp.dest('./product'))
+    .pipe(notify('HtmlGzip Finished'));
+});
+
 gulp.task('cleanProd', del.bind(null,
   [
     './product/img/**',
@@ -170,7 +207,15 @@ gulp.task('cleanProd', del.bind(null,
   ])
 );
 
-gulp.task('prod', ['cleanProd', 'jsProd', 'cssProd', 'imgProd']);
+gulp.task('prod', [
+  'cleanProd',
+  'jsProd',
+  'cssProd',
+  'imgProd',
+  'jsProdGzip',
+  'cssProdGzip',
+  'htmlProdGzip'
+]);
 
 /**
  * Sprite Tasks
