@@ -67,9 +67,10 @@
 
 ### svg_sprite - svgスプライト画像の作成
 `gulp sprite_sprite`で下記のタスクを実行します。
-- `develop/build/img/svg/**/*.png`を再帰的に読み込む
+- `develop/build/img/svg/**/*.svg`を再帰的に読み込む
 - 上記で得られたsvg画像群からスプライト画像を生成、スプライト画像はsvg/直下に`dirname.svg`という名称で配置される
-- htmlから`use`タグを利用して読み込むする場合は`fill`属性を指定する事で色を変更可能ですが、cssから`backgroud`プロパティを利用して読み込む場合は色は変更出来ません。
+- 各ディレクトリ直下に、スプライト画像に含まれる画像一覧を掲載した`sample_list.html`が配置される
+- なお、htmlから`use`タグを利用して読み込むする場合は`fill`属性を指定する事で色を変更可能ですが、cssから`backgroud`プロパティを利用して読み込む場合は色は変更出来ません。
 
 #### htmlから読み込む場合
 ```html
