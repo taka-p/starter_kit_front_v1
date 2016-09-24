@@ -25,6 +25,10 @@ import cssnano      from 'cssnano';
 /* img plugin */
 import imagemin    from 'gulp-imagemin';
 import spritesmith from 'gulp.spritesmith';
+import svgmin      from 'gulp-svgmin';
+import svgstore    from 'gulp-svgstore';
+import cheerio     from 'gulp-cheerio';
+import template    from 'gulp-template';
 import fs          from 'fs';
 import path        from 'path';
 
@@ -217,18 +221,20 @@ gulp.task('prod', [
   'htmlProdGzip'
 ]);
 
+
 /**
  * Sprite Tasks
  **/
+// 指定ディレクトリ内に存在するディレクトリ名を再帰的に取得
 const getFolders = dir => {
-  return fs.readdirSync(dir)
-    .filter(file => {
-      return fs.statSync(path.join(dir, file)).isDirectory();
-    });
+    return fs.readdirSync(dir)
+        .filter(file => {
+            return fs.statSync(path.join(dir, file)).isDirectory();
+        });
 };
 
 gulp.task('sprite', function () {
-  // set target folders
+  // spriteディレクトリ配下のディレクトリ名を再帰的に取得
   const folders = getFolders(conf.spriteDest + '/' + conf.spriteImg + '/sprite/');
 
   // generate image & sass files
@@ -249,4 +255,118 @@ gulp.task('sprite', function () {
     spriteData.img.pipe(gulp.dest(conf.spriteDest + '/' + conf.spriteImg + '/' + conf.spriteName));
     spriteData.css.pipe(gulp.dest(conf.spriteSrc + '/' + conf.spriteScss + '/' + 'foundation/variables' + '/' + conf.spriteName));
   });
+});
+
+/**
+ * Svg Sprite Tasks
+ **/
+gulp.task('svg_sprite', () => {
+    const baseDir = conf.svgBaseDir;
+    // baseDir配下のディレクトリ名を再帰的に取得
+    const folders = getFolders(baseDir);
+
+    folders.map(folder => {
+        // svgスプライトの素材対象
+        const srcGlob = conf.svgBaseDir + '/' + folder + '/' + '*.svg',
+        // サンプルガイドの格納先ディレクトリ
+              templateDestGlob = baseDir + '/' + folder;
+
+        gulp.src(srcGlob, { base: baseDir })
+            .pipe(svgmin())
+            .pipe(svgstore({ inlineSvg: true }))
+            .pipe(cheerio({
+                run: ($, file) => {
+                    const $svgTag = $('svg');
+
+                    // svg画像の属性を抽出($.mapは引数指定が逆)
+                    const symbols = $svgTag.find('symbol').map((idx, item) => {
+                        // viewBox内の値を抽出・配列に分割
+                        const viewBoxArr = $(item).attr('viewBox').match(/\d+/g);
+                        const symbolObj = {
+                            'id'    : $(item).attr('id'),
+                            'posX'  : viewBoxArr[0],
+                            'posY'  : viewBoxArr[1],
+                            'width' : viewBoxArr[2],
+                            'height': viewBoxArr[3]
+                        };
+                        return symbolObj;
+                    }).get();
+
+                    // 指定したタグと属性オブジェクトを元にタグのグループ(配列)を生成
+                    const tagGroupMaker = (tag, callback) => {
+                        const tagArr = symbols.map((item, idx) => {
+                            let heightArr = [];
+                            let reduceHeight = 0;
+                            if (idx > 0) {
+                                let $i = 0;
+                                for (; $i < idx; $i++) {
+                                    heightArr.push(symbols[idx-1].height);
+                                }
+                                reduceHeight = heightArr.reduce((prev, current)=>{
+                                    return parseInt(prev, 10) + parseInt(current, 10);
+                                });
+                            }
+
+                            const buildTag = $(tag).attr(callback(item, reduceHeight));
+                            return buildTag;
+                        });
+
+                        return tagArr;
+                    };
+
+                    // useタグの組み立て
+                    const useTagGroup = tagGroupMaker(
+                        '<use/>',
+                        (item, posY) => {
+                            return {
+                                'xlink:href': `#${item.id}`,
+                                'width'     : item.width,
+                                'height'    : item.height,
+                                'x'         : item.posX,
+                                // y座標位置の調整(重ならないようにする、余白の設定)
+                                'y'         : posY
+                            };
+                        }
+                    );
+
+                    // viewタグの組み立て
+                    const viewTagGroup = tagGroupMaker(
+                        '<view/>',
+                        (item, posY) => {
+                            return {
+                                'id'     : `${item.id}_css`,
+                                'viewBox': `0 ${posY} ${item.width} ${item.height}`
+                            };
+                        }
+                    );
+
+                    // svg配下に組み立てたタグを追加
+                    $svgTag.append(useTagGroup).append(viewTagGroup);
+
+                    $svgTag.attr({
+                        // デフォルトは非表示
+                        'display': 'none',
+                        // cssからのハッシュリンク読み取りを有効にする設定
+                        'xmlns:xlink': 'http://www.w3.org/1999/xlink'
+                    });
+                    // fill属性をリセット
+                    $('[fill]').removeAttr('fill');
+
+                    // _template.htmlを基に、_sample_list.htmlを生成
+                    gulp.src(conf.svgBaseDir + '/' + '_template.html')
+                        .pipe(template({
+                            inlineSvg  : $svgTag,
+                            symbols    : symbols,
+                            spriteName : folder
+                        }))
+                        .pipe(rename('sample_list.html'))
+                        .pipe(gulp.dest(templateDestGlob));
+                },
+                parserOptions: { xmlMode: true }
+            }))
+            .pipe(rename(path => {
+                path.basename = folder;
+            }))
+            .pipe(gulp.dest(baseDir));
+    });
 });

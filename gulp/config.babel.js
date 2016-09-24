@@ -31,13 +31,16 @@ export default {
   ],
 
   // img config
-  imgSrcDir: './develop/build/img',
-  imgDestDirProd: './product/img',
+  imgSrcDir      : './develop/build/img',
+  imgDestDirProd : './product/img',
 
   // sprite config
   spriteSrc   : './develop/src',
   spriteDest  : './develop/build',
   spriteScss  : 'scss',
   spriteImg   : 'img',
-  spriteName  : 'sprite'
+  spriteName  : 'sprite',
+
+  // svg config
+  svgBaseDir : './develop/build/img/svg'
 };

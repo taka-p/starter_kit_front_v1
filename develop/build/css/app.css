@@ -100,6 +100,15 @@ $spritesheet: width height image $spritesheet-sprites;
   background-size: 220px 128px;
   display: block; }
 
+.c-ico__arrow__up {
+  fill: pink; }
+
+.c-ico__arrow__up__svg {
+  display: block;
+  width: 300px;
+  height: 300px;
+  background: url(../img/svg/test_2.svg#apple_css); }
+
 /**
  * _utility.scss
  * helperクラスを定義
@@ -489,6 +498,7 @@ $spritesheet: width height image $spritesheet-sprites;
 .u-tdl {
   text-decoration: line-through !important; }
 
+/* Test */
 .row {
   margin-top: 2em;
   display: table;
