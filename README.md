@@ -65,6 +65,37 @@
 }
 ```
 
+### svg_sprite - svgスプライト画像の作成
+`gulp sprite_sprite`で下記のタスクを実行します。
+- `develop/build/img/svg/**/*.png`を再帰的に読み込む
+- 上記で得られたsvg画像群からスプライト画像を生成、スプライト画像はsvg/直下に`dirname.svg`という名称で配置される
+- htmlから`use`タグを利用して読み込むする場合は`fill`属性を指定する事で色を変更可能ですが、cssから`backgroud`プロパティを利用して読み込む場合は色は変更出来ません。
+
+#### htmlから読み込む場合
+```html
+<svg role="image" class="c-ico__arrow__up">
+    <use xlink:href="img/svg/test.svg#svg_1" />
+</svg>
+```
+```css
+.c-ico__arrow__up {
+    fill: pink;
+}
+```
+
+#### cssから読み込む場合
+```html
+<div class="c-ico__arrow__up__svg"></div>
+```
+```css
+.c-ico__arrow__up {
+  display: block;
+  width: 300px;
+  height: 300px;
+  background: url(../img/svg/test_2.svg#apple_css);
+}
+```
+
 ## インストール
 appは任意のディレクトリ名です。
 
