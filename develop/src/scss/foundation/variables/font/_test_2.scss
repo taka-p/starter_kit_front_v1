@@ -1,0 +1,45 @@
+/**
+ * font/_template.scss
+ * 自作font用scssを生成する雛形
+ */
+
+@font-face {
+  font-family: "test_2";
+  src: url('../img/font/test_2.eot');
+  src: url('../img/font/test_2.eot?#iefix') format('eot'),
+  url('../img/font/test_2.woff') format('woff'),
+  url('../img/font/test_2.ttf') format('truetype'),
+  url('../img/font/test_2.svg#test_2') format('svg');
+}
+
+@for $i from 1 through 4 {
+  .c-ico__test_2--#{$i}x {
+    font-size: #{$i}em;
+  }
+}
+
+.c-ico__test_2:before {
+  display: inline-block;
+  font-family     : "test_2";
+  font-style      : normal;
+  font-weight     : normal;
+  font-variant    : normal;
+  text-decoration : none;
+  text-transform  : none;
+  line-height     : 1;
+  -webkit-font-smoothing  : antialiased;
+  -moz-osx-font-smoothing : grayscale;
+}
+
+
+  .c-ico__test_2--apple:before {
+    content: "\EA01"
+  }
+
+  .c-ico__test_2--cherry:before {
+    content: "\EA02"
+  }
+
+  .c-ico__test_2--peach:before {
+    content: "\EA03"
+  }

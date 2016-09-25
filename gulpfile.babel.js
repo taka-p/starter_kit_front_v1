@@ -2,7 +2,7 @@
  * tasks - dev, prod, sprite
  * 詳しくはREADME.mdを参照
  */
-// todo: SVGからiconFont生成するタスク作成
+// todo: svg、iconfontタスクのパスをconigに移植
 // todo: eslintの調整
 // todo: stylelintの調整
 
@@ -28,9 +28,12 @@ import spritesmith from 'gulp.spritesmith';
 import svgmin      from 'gulp-svgmin';
 import svgstore    from 'gulp-svgstore';
 import cheerio     from 'gulp-cheerio';
-import template    from 'gulp-template';
+import iconfont    from 'gulp-iconfont';
+import iconfontCss from 'gulp-iconfont-css';
 import fs          from 'fs';
 import path        from 'path';
+import template    from 'gulp-template';
+import consolidate from 'gulp-consolidate';
 
 /* common plugin */
 import rename     from 'gulp-rename';
@@ -353,7 +356,7 @@ gulp.task('svg_sprite', () => {
                     $('[fill]').removeAttr('fill');
 
                     // _template.htmlを基に、_sample_list.htmlを生成
-                    gulp.src(conf.svgBaseDir + '/' + '_template.html')
+                    gulp.src('./develop/src/template/_svg.html')
                         .pipe(template({
                             inlineSvg  : $svgTag,
                             symbols    : symbols,
@@ -368,5 +371,57 @@ gulp.task('svg_sprite', () => {
                 path.basename = folder;
             }))
             .pipe(gulp.dest(baseDir));
+    });
+});
+
+/**
+ * Font Tasks
+ * 参考サイト - http://deepblue-will.hatenablog.com/entry/2015/08/24/Gulp%E3%81%A7%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E3%81%A8CSS%E3%81%A8HTML%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95
+ **/
+gulp.task('font', () => {
+    const baseDir = './develop/build/img/font';
+    const folders = getFolders(baseDir);
+
+    folders.map(folder => {
+        gulp.src('./develop/build/img/font' + '/' + folder + '/' + '*.svg')
+            .pipe(svgmin())
+            // アイコンフォント生成
+            .pipe(iconfont({
+                fontName: folder,
+                formats: ['ttf', 'eot', 'woff', 'svg']
+            }))
+            .on('glyphs', function(glyphs, options) {
+                // シンボルフォント用のcssを作成
+                gulp.src('./develop/src/template/_iconfont.scss')
+                    .pipe(consolidate('lodash', {
+                        glyphs: glyphs,
+                        fontName: folder,
+                        // フォントパスをCSSからの相対パスで指定
+                        fontPath: '../img/font/',
+                        // CSSのフォントのクラス名を指定
+                        className: folder
+                    }))
+                    .pipe(rename({
+                        basename: '_' + folder
+                    }))
+                    // CSSの吐き出し先を指定
+                    .pipe(gulp.dest('./develop/src/scss/foundation/variables/font/'));
+                // シンボルフォント一覧のサンプルHTMLを作成
+                gulp.src('./develop/src/template/_iconfont.html')
+                    .pipe(consolidate('lodash', {
+                        glyphs: glyphs,
+                        fontName: folder,
+                        // フォントパスをCSSからの相対パスで指定
+                        fontPath: '../',
+                        // CSSのフォントのクラス名を指定
+                        className: folder
+                    }))
+                    .pipe(rename({
+                        basename: 'sample_list'
+                    }))
+                    // サンプルHTMLの吐き出し先を指定
+                    .pipe(gulp.dest('./develop/build/img/font/' + folder));
+            })
+            .pipe(gulp.dest('./develop/build/img/font'));
     });
 });

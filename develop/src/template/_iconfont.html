@@ -1,0 +1,72 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><%= fontName %></title>
+    <link href="../../../css/app.css" rel="stylesheet">
+    <style>
+        html {
+            text-align: center;
+            background: #eee;
+        }
+        body {
+            margin: 0;
+        }
+
+        .title {
+            line-height: 35px;
+            padding: 7px;
+            margin: 0px auto 35px;
+            text-align: center;
+            background: #5a5a5a;
+            color: #fff;
+        }
+        .title span {
+            display: inline-block;
+            font-size: 25px;
+            font-family: monospace;
+        }
+        .font-icon-list {
+            padding: 0;
+            text-align: center;
+        }
+        .font-icon-list__item {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            margin: 0 5px 10px;
+            padding: 10px 20px 20px;
+            text-align: center;
+            vertical-align: top;
+            background: #fff;
+        }
+        .font-icon-list__item__name,
+        .font-icon-list__item__codepoint {
+            margin: 5px 0;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 17px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">
+            <span><%= fontName %></span>
+        </h1>
+        <ul class="font-icon-list">
+            <% _.each(glyphs, function(glyph) { %>
+            <li class="font-icon-list__item">
+                <i class="c-ico__<%= className %> c-ico__<%= className %>--4x c-ico__<%= className %>--<%= glyph.name %>"></i>
+                <p class="font-icon-list__item__name">
+                    <%= glyph.name %>
+                </p>
+                <p class="font-icon-list__item__codepoint">
+                    <%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>
+                </p>
+            </li>
+            <% }); %>
+        </ul>
+    </div>
+</body>
+</html>

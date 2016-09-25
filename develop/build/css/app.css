@@ -87,6 +87,93 @@ At the bottom of this section, we provide information about the spritesheet itse
 $spritesheet: width height image $spritesheet-sprites;
 */
 /**
+ * font/_template.scss
+ * 自作font用scssを生成する雛形
+ */
+@font-face {
+  font-family: "test";
+  src: url("../img/font/test.eot");
+  src: url("../img/font/test.eot?#iefix") format("eot"), url("../img/font/test.woff") format("woff"), url("../img/font/test.ttf") format("truetype"), url("../img/font/test.svg#test") format("svg"); }
+
+.c-ico__test--1x {
+  font-size: 1em; }
+
+.c-ico__test--2x {
+  font-size: 2em; }
+
+.c-ico__test--3x {
+  font-size: 3em; }
+
+.c-ico__test--4x {
+  font-size: 4em; }
+
+.c-ico__test:before {
+  display: inline-block;
+  font-family: "test";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-decoration: none;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.c-ico__test--svg_1:before {
+  content: "\EA01"; }
+
+.c-ico__test--svg_2:before {
+  content: "\EA02"; }
+
+.c-ico__test--svg_3:before {
+  content: "\EA03"; }
+
+.c-ico__test--svg_4:before {
+  content: "\EA04"; }
+
+/**
+ * font/_template.scss
+ * 自作font用scssを生成する雛形
+ */
+@font-face {
+  font-family: "test_2";
+  src: url("../img/font/test_2.eot");
+  src: url("../img/font/test_2.eot?#iefix") format("eot"), url("../img/font/test_2.woff") format("woff"), url("../img/font/test_2.ttf") format("truetype"), url("../img/font/test_2.svg#test_2") format("svg"); }
+
+.c-ico__test_2--1x {
+  font-size: 1em; }
+
+.c-ico__test_2--2x {
+  font-size: 2em; }
+
+.c-ico__test_2--3x {
+  font-size: 3em; }
+
+.c-ico__test_2--4x {
+  font-size: 4em; }
+
+.c-ico__test_2:before {
+  display: inline-block;
+  font-family: "test_2";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-decoration: none;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.c-ico__test_2--apple:before {
+  content: "\EA01"; }
+
+.c-ico__test_2--cherry:before {
+  content: "\EA02"; }
+
+.c-ico__test_2--peach:before {
+  content: "\EA03"; }
+
+/**
  * _icon.scss
  * 汎用的に利用出来るアイコンを定義
  * prefix - 'c-ico-'
