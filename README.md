@@ -66,7 +66,7 @@
 ```
 
 ### svg_sprite - svgスプライト画像の作成
-`gulp sprite_sprite`で下記のタスクを実行します。
+`gulp svg_sprite`で下記のタスクを実行します。
 - `develop/build/img/svg/**/*.svg`を再帰的に読み込む
 - 上記で得られたsvg画像群からスプライト画像を生成、スプライト画像はsvg/直下に`dirname.svg`という名称で配置される
 - 各ディレクトリ直下に、スプライト画像に含まれる画像一覧を掲載した`sample_list.html`が配置される
@@ -96,6 +96,15 @@
   background: url(../img/svg/test_2.svg#apple_css);
 }
 ```
+
+### font - フォントアイコンの作成
+`gulp font`で下記のタスクを実行します。
+- `develop/build/img/font/**/*.svg`を再帰的に読み込む
+- 上記で得られたsvg画像群からwebfontファイルを生成、スプライト画像はsvg/直下に`dirname.*`(各種フォント拡張子名)という名称で配置される
+- 各ディレクトリ直下に、webfontに含まれる画像一覧を掲載した`sample_list.html`が配置される
+- `foundation/variables/font/`直下に`_dirname.scss`というスタイルシートが生成されるため、それを`app.scss`などのimport基点ファイルから読み込む
+- `gulp dev`で上記のscssを再コンパイルすれば`sample_list.html`にて、画像が確認出来るようになります。
+- なお、`sample_list.html`には画像名と表示画像を指定する際のcordpoint(16進数のunicode文字列)が記載されています。
 
 ## インストール
 appは任意のディレクトリ名です。
