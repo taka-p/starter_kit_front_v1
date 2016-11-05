@@ -13,10 +13,14 @@
 /* Foundation */
         'foundation/_reset.scss',
         'foundation/_base.scss',
-        'foundation/mixin/_sprite.scss',
         'foundation/variables/_variables.scss',
         // スプライト画像
+        'foundation/mixin/_sprite.scss',
         'foundation/variables/sprite/_test.scss',
+        // SVGスプライト
+        'foundation/mixin/_svg_sprite.scss',
+        'foundation/variables/svg_sprite/_test.scss',
+        'foundation/variables/svg_sprite/_test_2.scss',
         // フォントアイコン
         'foundation/variables/font/_test.scss',
         'foundation/variables/font/_test_2.scss',
@@ -85,4 +89,8 @@
 }
 .row .col li:first-child {
   margin-top: 0;
+}
+
+.border {
+  border: 1px solid #000;
 }

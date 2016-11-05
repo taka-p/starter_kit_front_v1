@@ -27,6 +27,7 @@ import imagemin    from 'gulp-imagemin';
 import spritesmith from 'gulp.spritesmith';
 import svgmin      from 'gulp-svgmin';
 import svgstore    from 'gulp-svgstore';
+import svgSprite    from 'gulp-svg-sprite';
 import cheerio     from 'gulp-cheerio';
 import iconfont    from 'gulp-iconfont';
 import iconfontCss from 'gulp-iconfont-css';
@@ -54,174 +55,174 @@ import setting from './gulp/webpack_setting.babel';
  * Development Tasks
  **/
 gulp.task('jsDev', () => {
-  gulp.src(conf.jsSrc)
-    .pipe(plumber({
-      errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
-    }))
-    // .pipe(eslint({useEslintrc: true}))
-    // .pipe(eslint.format())
-    // .pipe(eslint.failAfterError())
-    .pipe(webpack(setting.webpack))
-    .pipe(sourcemaps.init({ loadMaps: true }))
-    // テストでuglifyする場合はconfを変更
-    .pipe(gulpif(conf.jsUglifyDev, uglify()))
-    .pipe(gulpif(conf.jsUglifyDev, rename(path => {
-      path.extname = '.min.js';
-    })))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(conf.jsDestDirDev))
-    .pipe(notify('Js Finished'));
+    gulp.src(conf.jsSrc)
+        .pipe(plumber({
+            errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
+        }))
+        // .pipe(eslint({useEslintrc: true}))
+        // .pipe(eslint.format())
+        // .pipe(eslint.failAfterError())
+        .pipe(webpack(setting.webpack))
+        .pipe(sourcemaps.init({loadMaps: true}))
+        // テストでuglifyする場合はconfを変更
+        .pipe(gulpif(conf.jsUglifyDev, uglify()))
+        .pipe(gulpif(conf.jsUglifyDev, rename(path => {
+            path.extname = '.min.js';
+        })))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(conf.jsDestDirDev))
+        .pipe(notify('Js Finished'));
 });
 
 gulp.task('cssDev', () => {
-  const processors = [
-    // stylelint(stylelintrc),
-    doiuse({browsers: conf.browsers, ignore: conf.ignores}),
-    autoprefixer({browsers: conf.browsers}),
-    reporter()
-  ];
+    const processors = [
+        // stylelint(stylelintrc),
+        // doiuse({browsers: conf.browsers, ignore: conf.ignores}),
+        autoprefixer({browsers: conf.browsers}),
+        reporter()
+    ];
 
-  // テストでcssnanoする場合はconfを変更
-  if (conf.cssNano) {
-    processors.push(cssnano({autoprefixer: false}));
-  }
+    // テストでcssnanoする場合はconfを変更
+    if (conf.cssNano) {
+        processors.push(cssnano({autoprefixer: false}));
+    }
 
-  return gulp.src(conf.cssSrc)
-    .pipe(plumber({
-      errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
-    }))
-    .pipe(sourcemaps.init())
-    .pipe(sass())
-    .pipe(postcss(processors))
-    .pipe(rename(path => {
-      if (conf.cssNanoDev) {
-        path.extname = '.min.css';
-      } else {
-        path.extname = '.css';
-      }
-    }))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(conf.cssDestDirDev))
-    .pipe(notify('Scss Finished'));
+    return gulp.src(conf.cssSrc)
+        .pipe(plumber({
+            errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
+        }))
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(postcss(processors))
+        .pipe(rename(path => {
+            if (conf.cssNanoDev) {
+                path.extname = '.min.css';
+            } else {
+                path.extname = '.css';
+            }
+        }))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(conf.cssDestDirDev))
+        .pipe(notify('Scss Finished'));
 });
 
 gulp.task('watchDev', () => {
-  gulp.watch(conf.jsSrc, ['jsDev']);
-  gulp.watch(conf.cssSrc, ['cssDev']);
+    gulp.watch(conf.jsSrc, ['jsDev']);
+    gulp.watch(conf.cssSrc, ['cssDev']);
 });
 
 gulp.task('dev', ['watchDev']);
 
 /**
  * Production Tasks
-**/
+ **/
 gulp.task('jsProd', () => {
-  gulp.src(conf.jsSrc)
-    .pipe(plumber({
-      errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
-    }))
-    .pipe(webpack(setting.webpack))
-    // uglifyしたくない場合はconfigでfalseに変更
-    .pipe(gulpif(conf.jsUglifyProd, uglify()))
-    // .pipe(gulpif(conf.jsUglifyProd, rename(path => {
-    //   path.extname = '.min.js';
-    // })))
-    .pipe(gulp.dest(conf.jsDestDirProd))
-    .pipe(notify('Js Finished'));
+    gulp.src(conf.jsSrc)
+        .pipe(plumber({
+            errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
+        }))
+        .pipe(webpack(setting.webpack))
+        // uglifyしたくない場合はconfigでfalseに変更
+        .pipe(gulpif(conf.jsUglifyProd, uglify()))
+        // .pipe(gulpif(conf.jsUglifyProd, rename(path => {
+        //   path.extname = '.min.js';
+        // })))
+        .pipe(gulp.dest(conf.jsDestDirProd))
+        .pipe(notify('Js Finished'));
 });
 
 gulp.task('jsProdGzip', () => {
-  gulp.src(conf.jsSrc)
-    .pipe(plumber({
-      errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
-    }))
-    .pipe(webpack(setting.webpack))
-    // uglifyしたくない場合はconfigでfalseに変更
-    .pipe(gulpif(conf.jsGzipProd, gzip()))
-    .pipe(gulp.dest(conf.jsDestDirProd))
-    .pipe(notify('JsGzip Finished'));
+    gulp.src(conf.jsSrc)
+        .pipe(plumber({
+            errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
+        }))
+        .pipe(webpack(setting.webpack))
+        // uglifyしたくない場合はconfigでfalseに変更
+        .pipe(gulpif(conf.jsGzipProd, gzip()))
+        .pipe(gulp.dest(conf.jsDestDirProd))
+        .pipe(notify('JsGzip Finished'));
 });
 
 gulp.task('cssProd', () => {
-  const processors = [
-    autoprefixer({browsers: conf.browsers})
-  ];
+    const processors = [
+        autoprefixer({browsers: conf.browsers})
+    ];
 
-  // cssnanoしたくない場合はconfigでfalseに変更
-  if (conf.cssNanoProd) {
-    processors.push(cssnano({autoprefixer: false}));
-  }
+    // cssnanoしたくない場合はconfigでfalseに変更
+    if (conf.cssNanoProd) {
+        processors.push(cssnano({autoprefixer: false}));
+    }
 
-  return gulp.src(conf.cssSrc)
-    .pipe(plumber({
-      errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
-    }))
-    .pipe(sass())
-    .pipe(postcss(processors))
-    .pipe(gulp.dest(conf.cssDestDirProd))
-    .pipe(notify('Scss Finished'));
+    return gulp.src(conf.cssSrc)
+        .pipe(plumber({
+            errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
+        }))
+        .pipe(sass())
+        .pipe(postcss(processors))
+        .pipe(gulp.dest(conf.cssDestDirProd))
+        .pipe(notify('Scss Finished'));
 });
 
 gulp.task('cssProdGzip', () => {
-  const processors = [
-    autoprefixer({browsers: conf.browsers})
-  ];
+    const processors = [
+        autoprefixer({browsers: conf.browsers})
+    ];
 
-  // cssnanoしたくない場合はconfigでfalseに変更
-  if (conf.cssNanoProd) {
-    processors.push(cssnano({autoprefixer: false}));
-  }
+    // cssnanoしたくない場合はconfigでfalseに変更
+    if (conf.cssNanoProd) {
+        processors.push(cssnano({autoprefixer: false}));
+    }
 
-  return gulp.src(conf.cssSrc)
-    .pipe(plumber({
-      errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
-    }))
-    .pipe(sass())
-    .pipe(postcss(processors))
-    .pipe(gulpif(conf.jsGzipProd, gzip()))
-    .pipe(gulp.dest(conf.cssDestDirProd))
-    .pipe(notify('Scss Finished'));
+    return gulp.src(conf.cssSrc)
+        .pipe(plumber({
+            errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
+        }))
+        .pipe(sass())
+        .pipe(postcss(processors))
+        .pipe(gulpif(conf.jsGzipProd, gzip()))
+        .pipe(gulp.dest(conf.cssDestDirProd))
+        .pipe(notify('Scss Finished'));
 });
 
 gulp.task('imgProd', () => {
-  const srcGlob = conf.imgSrcDir + '/**/*.+(jpg|jpeg|png|gif|svg)',
-    dstGlob = conf.imgDestDirProd,
-    imageminOptions = {
-      optimizationLevel: 7
-    };
+    const srcGlob = conf.imgSrcDir + '/**/*.+(jpg|jpeg|png|gif|svg)',
+        dstGlob = conf.imgDestDirProd,
+        imageminOptions = {
+            optimizationLevel: 7
+        };
 
-  gulp.src(srcGlob)
-    .pipe(imagemin(imageminOptions))
-    .pipe(gulp.dest(dstGlob))
-    .pipe(notify('Img Finished'));
+    gulp.src(srcGlob)
+        .pipe(imagemin(imageminOptions))
+        .pipe(gulp.dest(dstGlob))
+        .pipe(notify('Img Finished'));
 });
 
 gulp.task('htmlProdGzip', () => {
-  gulp.src('./develop/build/index.html')
-    .pipe(plumber({
-      errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
-    }))
-    .pipe(gulpif(true, gzip()))
-    .pipe(gulp.dest('./product'))
-    .pipe(notify('HtmlGzip Finished'));
+    gulp.src('./develop/build/index.html')
+        .pipe(plumber({
+            errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
+        }))
+        .pipe(gulpif(true, gzip()))
+        .pipe(gulp.dest('./product'))
+        .pipe(notify('HtmlGzip Finished'));
 });
 
 gulp.task('cleanProd', del.bind(null,
-  [
-    './product/img/**',
-    './product/js/**',
-    './product/css/**'
-  ])
+    [
+        './product/img/**',
+        './product/js/**',
+        './product/css/**'
+    ])
 );
 
 gulp.task('prod', [
-  'cleanProd',
-  'jsProd',
-  'cssProd',
-  'imgProd',
-  'jsProdGzip',
-  'cssProdGzip',
-  'htmlProdGzip'
+    'cleanProd',
+    'jsProd',
+    'cssProd',
+    'imgProd',
+    'jsProdGzip',
+    'cssProdGzip',
+    'htmlProdGzip'
 ]);
 
 
@@ -237,46 +238,100 @@ const getFolders = dir => {
 };
 
 gulp.task('sprite', function () {
-  // spriteディレクトリ配下のディレクトリ名を再帰的に取得
-  const folders = getFolders(conf.spriteDest + '/' + conf.spriteImg + '/sprite/');
+    // spriteディレクトリ配下のディレクトリ名を再帰的に取得
+    const folders = getFolders(conf.spriteDest + '/' + conf.spriteImg + '/sprite/');
 
-  // generate image & sass files
-  folders.map(folder => {
-    const spriteData = gulp.src('sprite/' + folder + '/*.png', { cwd: conf.spriteDest + '/' + conf.spriteImg })
-      .pipe(spritesmith({
-        imgName  : folder + '.png',
-        imgPath  : '../' + conf.spriteImg + '/' + conf.spriteName + '/' + folder + '.png',
-        cssName  : '_' + folder + '.scss',
-        algorithm: 'binary-tree',
-        padding  : 4,
-        cssFormat: 'scss',
-        cssOpts: {
-          functions: false
-        }
-      }));
+    // generate image & sass files
+    folders.map(folder => {
+        const spriteData = gulp.src('sprite/' + folder + '/*.png', {cwd: conf.spriteDest + '/' + conf.spriteImg})
+            .pipe(spritesmith({
+                imgName: folder + '.png',
+                imgPath: '../' + conf.spriteImg + '/' + conf.spriteDirName + '/' + folder + '.png',
+                cssName: '_' + folder + '.scss',
+                algorithm: 'binary-tree',
+                padding: 4,
+                cssFormat: 'scss',
+                cssOpts: {
+                    functions: false
+                }
+            }));
 
-    spriteData.img.pipe(gulp.dest(conf.spriteDest + '/' + conf.spriteImg + '/' + conf.spriteName));
-    spriteData.css.pipe(gulp.dest(conf.spriteSrc + '/' + conf.spriteScss + '/' + 'foundation/variables' + '/' + conf.spriteName));
-  });
+        spriteData.img.pipe(gulp.dest(conf.spriteDest + '/' + conf.spriteImg + '/' + conf.spriteDirName));
+        spriteData.css.pipe(gulp.dest(conf.spriteSrc + '/' + conf.spriteScss + '/' + 'foundation/variables' + '/' + conf.spriteDirName));
+    });
 });
 
 /**
- * Svg Sprite Tasks
+ * Svg Sprite Tasks (ver background-position, use svg-sprite)
+ * 参考サイト - https://www.liquidlight.co.uk/blog/article/creating-svg-sprites-using-gulp-and-sass/
  **/
-gulp.task('svg_sprite', () => {
-    const baseDir = conf.svgBaseDir;
+gulp.task('svg_sprite', function () {
+    const folders = getFolders(conf.svgBaseDir);
+
+    folders.map(folder => {
+
+        const srcSvg      = `${conf.svgBaseDir}/${folder}/*.svg`,
+            srcScssTmp  = `${conf.tmpSrcDir}/_svg_sprite.scss`,
+            destScssTmp = `../../../../develop/src/scss/foundation/variables/svg_sprite/_${folder}.scss`,
+            srcHtmlTmp  = `${conf.tmpSrcDir}/_svg_sprite.html`,
+            destHtmlTmp = `../../../../develop/build/img/svg_sprite/${folder}/svg_sample.html`;
+
+        return gulp.src(srcSvg)
+            .pipe(svgmin())
+            .pipe(svgSprite({
+                shape: {
+                    dimension: {
+                        maxWidth : 32,
+                        maxHeight: 32
+                    },
+                    spacing: {
+                        padding: 0
+                    }
+                },
+                mode: {
+                    css: {
+                        dest  : "./",
+                        layout: "diagonal",
+                        sprite: `${folder}.svg`,
+                        bust  : false,
+                        render: {
+                            scss: {
+                                template: srcScssTmp,
+                                dest    : destScssTmp
+                            },
+                            html: {
+                                template: srcHtmlTmp,
+                                dest    : destHtmlTmp
+                            }
+                        }
+                    }
+                },
+                variables: {
+                    dirname: folder
+                }
+            }))
+            .pipe(gulp.dest(conf.svgBaseDir));
+    })
+});
+
+/**
+ * Svg Sprite Tasks (ver fragmentIdentifier, use svg-store)
+ **/
+gulp.task('svg_sprite_flag', () => {
+    const baseDir = conf.svgFlagBaseDir;
     // baseDir配下のディレクトリ名を再帰的に取得
     const folders = getFolders(baseDir);
 
     folders.map(folder => {
         // svgスプライトの素材対象
-        const srcGlob = conf.svgBaseDir + '/' + folder + '/' + '*.svg',
+        const srcGlob = conf.svgFlagBaseDir + '/' + folder + '/*.svg',
         // サンプルガイドの格納先ディレクトリ
+              templateSrcGlob = conf.tmpSrcDir + '/_svg_sprite_flag.html',
               templateDestGlob = baseDir + '/' + folder;
 
-        gulp.src(srcGlob, { base: baseDir })
+        gulp.src(srcGlob, {base: baseDir})
             .pipe(svgmin())
-            .pipe(svgstore({ inlineSvg: true }))
+            .pipe(svgstore({inlineSvg: true}))
             .pipe(cheerio({
                 run: ($, file) => {
                     const $svgTag = $('svg');
@@ -286,10 +341,10 @@ gulp.task('svg_sprite', () => {
                         // viewBox内の値を抽出・配列に分割
                         const viewBoxArr = $(item).attr('viewBox').match(/\d+/g);
                         const symbolObj = {
-                            'id'    : $(item).attr('id'),
-                            'posX'  : viewBoxArr[0],
-                            'posY'  : viewBoxArr[1],
-                            'width' : viewBoxArr[2],
+                            'id': $(item).attr('id'),
+                            'posX': viewBoxArr[0],
+                            'posY': viewBoxArr[1],
+                            'width': viewBoxArr[2],
                             'height': viewBoxArr[3]
                         };
                         return symbolObj;
@@ -303,9 +358,9 @@ gulp.task('svg_sprite', () => {
                             if (idx > 0) {
                                 let $i = 0;
                                 for (; $i < idx; $i++) {
-                                    heightArr.push(symbols[idx-1].height);
+                                    heightArr.push(symbols[idx - 1].height);
                                 }
-                                reduceHeight = heightArr.reduce((prev, current)=>{
+                                reduceHeight = heightArr.reduce((prev, current)=> {
                                     return parseInt(prev, 10) + parseInt(current, 10);
                                 });
                             }
@@ -323,11 +378,11 @@ gulp.task('svg_sprite', () => {
                         (item, posY) => {
                             return {
                                 'xlink:href': `#${item.id}`,
-                                'width'     : item.width,
-                                'height'    : item.height,
-                                'x'         : item.posX,
+                                'width': item.width,
+                                'height': item.height,
+                                'x': item.posX,
                                 // y座標位置の調整(重ならないようにする、余白の設定)
-                                'y'         : posY
+                                'y': posY
                             };
                         }
                     );
@@ -337,7 +392,7 @@ gulp.task('svg_sprite', () => {
                         '<view/>',
                         (item, posY) => {
                             return {
-                                'id'     : `${item.id}_css`,
+                                'id': `${item.id}_flag`,
                                 'viewBox': `0 ${posY} ${item.width} ${item.height}`
                             };
                         }
@@ -356,16 +411,16 @@ gulp.task('svg_sprite', () => {
                     $('[fill]').removeAttr('fill');
 
                     // _template.htmlを基に、_sample_list.htmlを生成
-                    gulp.src('./develop/src/template/_svg.html')
+                    gulp.src(templateSrcGlob)
                         .pipe(template({
-                            inlineSvg  : $svgTag,
-                            symbols    : symbols,
-                            spriteName : folder
+                            inlineSvg: $svgTag,
+                            symbols: symbols,
+                            spriteName: folder
                         }))
-                        .pipe(rename('sample_list.html'))
+                        .pipe(rename('svg_sample.html'))
                         .pipe(gulp.dest(templateDestGlob));
                 },
-                parserOptions: { xmlMode: true }
+                parserOptions: {xmlMode: true}
             }))
             .pipe(rename(path => {
                 path.basename = folder;
@@ -390,7 +445,7 @@ gulp.task('font', () => {
                 fontName: folder,
                 formats: ['ttf', 'eot', 'woff', 'svg']
             }))
-            .on('glyphs', function(glyphs, options) {
+            .on('glyphs', function (glyphs, options) {
                 // シンボルフォント用のcssを作成
                 gulp.src('./develop/src/template/_iconfont.scss')
                     .pipe(consolidate('lodash', {

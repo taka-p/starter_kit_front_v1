@@ -1,0 +1,107 @@
+<html>
+<head>
+    <title>test.svg</title>
+    <style>
+        html {
+            background: #eee;
+        }
+        body {
+            margin: 0;
+        }
+        svg {
+            width: 70px;
+            height: 70px;
+        }
+
+        .title {
+            padding: 7px;
+            margin: 0px auto 35px;
+            text-align: center;
+            background: #5a5a5a;
+            color: #fff;
+        }
+        .title span {
+            display: inline-block;
+            font-size: 25px;
+            font-family: monospace;
+        }
+        .svg-icon-list {
+            padding: 0;
+            text-align: center;
+        }
+        .svg-icon-list__item {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            margin: 0 5px 10px;
+            padding: 20px 5px 0;
+            text-align: center;
+            vertical-align: top;
+            background: #fff;
+            box-sizing: border-box;
+        }
+        .svg-icon-list__item__id {
+            margin: 10px 0 0 0;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 17px;
+            word-break: break-all;
+        }
+            .svg-icon-svg_1 {
+                display            : inline-block;
+                width              : 32px;
+                height             : 32px;
+                background-image   : url(../test.svg);
+                background-size    : 128px 128px;
+                background-position: 0 0;
+            }
+            .svg-icon-svg_2 {
+                display            : inline-block;
+                width              : 32px;
+                height             : 32px;
+                background-image   : url(../test.svg);
+                background-size    : 128px 128px;
+                background-position: -32 -32;
+            }
+            .svg-icon-svg_3 {
+                display            : inline-block;
+                width              : 32px;
+                height             : 32px;
+                background-image   : url(../test.svg);
+                background-size    : 128px 128px;
+                background-position: -64 -64;
+            }
+            .svg-icon-svg_4 {
+                display            : inline-block;
+                width              : 32px;
+                height             : 32px;
+                background-image   : url(../test.svg);
+                background-size    : 128px 128px;
+                background-position: -96 -96;
+            }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="title"><span>test.svg</span></h1>
+    <ul class="svg-icon-list">
+        <li class="svg-icon-list__item">
+            <i class="svg-icon-svg_1"></i>
+            <p class="svg-icon-list__item__id">svg_1</p>
+        </li>
+        <li class="svg-icon-list__item">
+            <i class="svg-icon-svg_2"></i>
+            <p class="svg-icon-list__item__id">svg_2</p>
+        </li>
+        <li class="svg-icon-list__item">
+            <i class="svg-icon-svg_3"></i>
+            <p class="svg-icon-list__item__id">svg_3</p>
+        </li>
+        <li class="svg-icon-list__item">
+            <i class="svg-icon-svg_4"></i>
+            <p class="svg-icon-list__item__id">svg_4</p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

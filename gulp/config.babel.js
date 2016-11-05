@@ -35,12 +35,18 @@ export default {
   imgDestDirProd : './product/img',
 
   // sprite config
-  spriteSrc   : './develop/src',
-  spriteDest  : './develop/build',
-  spriteScss  : 'scss',
-  spriteImg   : 'img',
-  spriteName  : 'sprite',
+  spriteSrc     : './develop/src',
+  spriteDest    : './develop/build',
+  spriteScss    : 'scss',
+  spriteImg     : 'img',
+  spriteDirName : 'sprite',
 
   // svg config
-  svgBaseDir : './develop/build/img/svg'
+  // reguler ver
+  svgBaseDir : './develop/build/img/svg_sprite',
+  // flagment Identifier ver
+  svgFlagBaseDir : './develop/build/img/svg_sprite_flag',
+
+  // template
+  tmpSrcDir : './develop/src/template'
 };

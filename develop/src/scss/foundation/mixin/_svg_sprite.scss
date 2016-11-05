@@ -1,0 +1,78 @@
+/**
+ * mixin/_svg_sprite.scss
+ * SVGスプライト画像読み込む用のmixinを定義
+ * ex. @include svg-sprite($something);
+ */
+
+@function sprite-attr($svg-sprite, $svg, $attr) {
+  $newIcon: map-get($svg-sprite, $svg);
+
+  @if $newIcon == null {
+    @warn "Can't find an icon with the name #{$svg}";
+  }
+
+  @return map-get($newIcon, $attr);
+}
+
+@function icon-attr($svg-sprite, $svg) {
+  $attr: (
+    width : sprite-attr($svg-sprite, $svg, width),
+    height: sprite-attr($svg-sprite, $svg, height),
+    x     : sprite-attr($svg-sprite, $svg, backgroundX),
+    y     : sprite-attr($svg-sprite, $svg, backgroundY)
+  );
+
+  @return $attr;
+}
+
+@function sprite-base-props($target-sprite, $scale) {
+  $target          : map-get($target-sprite, sprite) !default;
+  $converted-width : round(map-get($target, width) * $scale);
+  $converted-height: round(map-get($target, height) * $scale);
+
+  $base-props: (
+    display         : inline-block,
+    background-image: url(map-get($target, svgPath)),
+    background-size : $converted-width $converted-height
+  );
+
+  @return $base-props;
+}
+
+/**
+ * svg-sprite
+ * @param1: $svg-sprite - スプライト画像のファイル名(svg/直下のディレクトリ名)
+ * @param2: $svg - 利用したいsvg画像のファイル名
+ * @param3: $type - all or size, default all
+ * @param4: $scale - 画像の比率, default 1
+ * ex. @include svg-sprite(sprite_name, icon_name, 1.5)
+ */
+
+@mixin svg-sprite($svg-sprite, $svg, $type: all, $scale: 1) {
+  @if $type == all {
+    $ret: sprite-base-props($svg-sprite, $scale);
+
+    display         : map-get($ret, display);
+    background-image: map-get($ret, background-image);
+    background-size : map-get($ret, background-size);
+  }
+
+  $svgMap: icon-attr($svg-sprite, $svg);
+
+  // Outputs dimensions in em
+  @if $type == all or $type == size {
+    $converted-width : round(map-get($svgMap, width) * $scale);
+    $converted-height: round(map-get($svgMap, height) * $scale);
+
+    width : $converted-width;
+    height: $converted-height;
+  }
+
+  // Outputs background position in em
+  @if $type == all or $type == bg {
+    $converted-x : round(map-get($svgMap, x) * $scale);
+    $converted-y : round(map-get($svgMap, y) * $scale);
+
+    background-position: $converted-x $converted-y;
+  }
+}

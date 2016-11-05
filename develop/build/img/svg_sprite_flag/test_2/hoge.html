@@ -1,0 +1,94 @@
+<html>
+<head>
+    <title>test_2.svg</title>
+    <style>
+        html {
+            background: #eee;
+        }
+        body {
+            margin: 0;
+        }
+        svg {
+            width: 70px;
+            height: 70px;
+        }
+
+        .title {
+            padding: 7px;
+            margin: 0px auto 35px;
+            text-align: center;
+            background: #5a5a5a;
+            color: #fff;
+        }
+        .title span {
+            display: inline-block;
+            font-size: 25px;
+            font-family: monospace;
+        }
+        .svg-icon-list {
+            padding: 0;
+            text-align: center;
+        }
+        .svg-icon-list__item {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            margin: 0 5px 10px;
+            padding: 10px 5px 0;
+            text-align: center;
+            vertical-align: top;
+            background: #fff;
+        }
+        .svg-icon-list__item__id {
+            margin: 0;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 17px;
+            word-break: break-all;
+        }
+            .svg-icon-apple {
+                display            : inline-block;
+                width              : 32px;
+                height             : 32px;
+                background-image   : url(../test_2.svg);
+                background-size    : 96px 96px;
+                background-position: 0 0;
+            }
+            .svg-icon-cherry {
+                display            : inline-block;
+                width              : 32px;
+                height             : 32px;
+                background-image   : url(../test_2.svg);
+                background-size    : 96px 96px;
+                background-position: -32 -32;
+            }
+            .svg-icon-peach {
+                display            : inline-block;
+                width              : 32px;
+                height             : 32px;
+                background-image   : url(../test_2.svg);
+                background-size    : 96px 96px;
+                background-position: -64 -64;
+            }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="title"><span>test_2.svg</span></h1>
+    <ul class="svg-icon-list">
+        <li class="svg-icon-list__item">
+            <i class="svg-icon-apple"></i>
+            <p class="svg-icon-list__item__id">apple</p>
+        </li>
+        <li class="svg-icon-list__item">
+            <i class="svg-icon-cherry"></i>
+            <p class="svg-icon-list__item__id">cherry</p>
+        </li>
+        <li class="svg-icon-list__item">
+            <i class="svg-icon-peach"></i>
+            <p class="svg-icon-list__item__id">peach</p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

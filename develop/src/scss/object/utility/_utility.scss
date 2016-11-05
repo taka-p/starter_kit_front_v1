@@ -92,16 +92,16 @@
     @if ($i == 0) {
       $value_str: #{$i};
     }
-    .u-m#{$i}  { margin: #{$value_str} !important; }
-    .u-mt#{$i} { margin: #{$value_str} !important; }
-    .u-mr#{$i} { margin: #{$value_str} !important; }
-    .u-mb#{$i} { margin: #{$value_str} !important; }
-    .u-ml#{$i} { margin: #{$value_str} !important; }
-    .u-p#{$i}  { margin: #{$value_str} !important; }
-    .u-pt#{$i} { margin: #{$value_str} !important; }
-    .u-pr#{$i} { margin: #{$value_str} !important; }
-    .u-pb#{$i} { margin: #{$value_str} !important; }
-    .u-pl#{$i} { margin: #{$value_str} !important; }
+    .u-m#{$i}  { margin       : #{$value_str} !important; }
+    .u-mt#{$i} { margin-top   : #{$value_str} !important; }
+    .u-mr#{$i} { margin-right : #{$value_str} !important; }
+    .u-mb#{$i} { margin-bottom: #{$value_str} !important; }
+    .u-ml#{$i} { margin-left  : #{$value_str} !important; }
+    .u-p#{$i}  { margin       : #{$value_str} !important; }
+    .u-pt#{$i} { margin-top   : #{$value_str} !important; }
+    .u-pr#{$i} { margin-right : #{$value_str} !important; }
+    .u-pb#{$i} { margin-bottom: #{$value_str} !important; }
+    .u-pl#{$i} { margin-left  : #{$value_str} !important; }
   }
 }
 

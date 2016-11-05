@@ -64,14 +64,14 @@ table {
  * 固有のスタイルはここに定義しない
  */
 /**
- * mixin/_sprite.scss
- * スプライト画像読み込む用のmixinを定義
- * ex. @include r-sprite($something);
- */
-/**
  * variable/_variable.scss
  * 共用の変数を定義
  * 固有の変数はここに定義しない
+ */
+/**
+ * mixin/_sprite.scss
+ * スプライト画像読み込む用のmixinを定義
+ * ex. @include r-sprite($something);
  */
 /*
 SCSS variables are information about icon's compiled state, stored under its original file name
@@ -86,6 +86,27 @@ $icon-home: x y offset_x offset_y width height total_width total_height image_pa
 At the bottom of this section, we provide information about the spritesheet itself
 $spritesheet: width height image $spritesheet-sprites;
 */
+/**
+ * mixin/_svg_sprite.scss
+ * SVGスプライト画像読み込む用のmixinを定義
+ * ex. @include svg-sprite($something);
+ */
+/**
+ * svg-sprite
+ * @param1: $svg-sprite - スプライト画像のファイル名(svg/直下のディレクトリ名)
+ * @param2: $svg - 利用したいsvg画像のファイル名
+ * @param3: $type - all or size, default all
+ * @param4: $scale - 画像の比率, default 1
+ * ex. @include svg-sprite(sprite_name, icon_name, 1.5)
+ */
+/**
+ * template/_svg_sprite.scss
+ * SVGスプライト画像読込用のプロパティ群を定義
+ */
+/**
+ * template/_svg_sprite.scss
+ * SVGスプライト画像読込用のプロパティ群を定義
+ */
 /**
  * font/_template.scss
  * 自作font用scssを生成する雛形
@@ -187,14 +208,44 @@ $spritesheet: width height image $spritesheet-sprites;
   background-size: 220px 128px;
   display: block; }
 
-.c-ico__arrow__up {
-  fill: pink; }
+.c-ico__svg__fragment {
+  width: 150px;
+  fill: crimson; }
 
-.c-ico__arrow__up__svg {
-  display: block;
-  width: 300px;
-  height: 300px;
-  background: url(../img/svg/test_2.svg#apple_css); }
+.c-ico__svg__fragment--background-image {
+  display: inline-block;
+  width: 150px;
+  height: 150px; }
+  .c-ico__svg__fragment--background-image.apple {
+    background-image: url("../img/svg_sprite_flag/test_2.svg#apple_flag"); }
+  .c-ico__svg__fragment--background-image.cherry {
+    background-image: url("../img/svg_sprite_flag/test_2.svg#cherry_flag"); }
+  .c-ico__svg__fragment--background-image.peach {
+    background-image: url("../img/svg_sprite_flag/test_2.svg#peach_flag"); }
+
+.c-ico__svg__background-potision--apple {
+  display: inline-block;
+  background-image: url("../img/svg_sprite/test_2.svg");
+  background-size: 480px 480px;
+  width: 160px;
+  height: 160px;
+  background-position: 0px 0px; }
+
+.c-ico__svg__background-potision--cherry {
+  display: inline-block;
+  background-image: url("../img/svg_sprite/test_2.svg");
+  background-size: 480px 480px;
+  width: 160px;
+  height: 160px;
+  background-position: -160px -160px; }
+
+.c-ico__svg__background-potision--peach {
+  display: inline-block;
+  background-image: url("../img/svg_sprite/test_2.svg");
+  background-size: 480px 480px;
+  width: 160px;
+  height: 160px;
+  background-position: -320px -320px; }
 
 /**
  * _utility.scss
@@ -331,211 +382,211 @@ $spritesheet: width height image $spritesheet-sprites;
   margin: 0 !important; }
 
 .u-mt0 {
-  margin: 0 !important; }
+  margin-top: 0 !important; }
 
 .u-mr0 {
-  margin: 0 !important; }
+  margin-right: 0 !important; }
 
 .u-mb0 {
-  margin: 0 !important; }
+  margin-bottom: 0 !important; }
 
 .u-ml0 {
-  margin: 0 !important; }
+  margin-left: 0 !important; }
 
 .u-p0 {
   margin: 0 !important; }
 
 .u-pt0 {
-  margin: 0 !important; }
+  margin-top: 0 !important; }
 
 .u-pr0 {
-  margin: 0 !important; }
+  margin-right: 0 !important; }
 
 .u-pb0 {
-  margin: 0 !important; }
+  margin-bottom: 0 !important; }
 
 .u-pl0 {
-  margin: 0 !important; }
+  margin-left: 0 !important; }
 
 .u-m5 {
   margin: 5px !important; }
 
 .u-mt5 {
-  margin: 5px !important; }
+  margin-top: 5px !important; }
 
 .u-mr5 {
-  margin: 5px !important; }
+  margin-right: 5px !important; }
 
 .u-mb5 {
-  margin: 5px !important; }
+  margin-bottom: 5px !important; }
 
 .u-ml5 {
-  margin: 5px !important; }
+  margin-left: 5px !important; }
 
 .u-p5 {
   margin: 5px !important; }
 
 .u-pt5 {
-  margin: 5px !important; }
+  margin-top: 5px !important; }
 
 .u-pr5 {
-  margin: 5px !important; }
+  margin-right: 5px !important; }
 
 .u-pb5 {
-  margin: 5px !important; }
+  margin-bottom: 5px !important; }
 
 .u-pl5 {
-  margin: 5px !important; }
+  margin-left: 5px !important; }
 
 .u-m10 {
   margin: 10px !important; }
 
 .u-mt10 {
-  margin: 10px !important; }
+  margin-top: 10px !important; }
 
 .u-mr10 {
-  margin: 10px !important; }
+  margin-right: 10px !important; }
 
 .u-mb10 {
-  margin: 10px !important; }
+  margin-bottom: 10px !important; }
 
 .u-ml10 {
-  margin: 10px !important; }
+  margin-left: 10px !important; }
 
 .u-p10 {
   margin: 10px !important; }
 
 .u-pt10 {
-  margin: 10px !important; }
+  margin-top: 10px !important; }
 
 .u-pr10 {
-  margin: 10px !important; }
+  margin-right: 10px !important; }
 
 .u-pb10 {
-  margin: 10px !important; }
+  margin-bottom: 10px !important; }
 
 .u-pl10 {
-  margin: 10px !important; }
+  margin-left: 10px !important; }
 
 .u-m15 {
   margin: 15px !important; }
 
 .u-mt15 {
-  margin: 15px !important; }
+  margin-top: 15px !important; }
 
 .u-mr15 {
-  margin: 15px !important; }
+  margin-right: 15px !important; }
 
 .u-mb15 {
-  margin: 15px !important; }
+  margin-bottom: 15px !important; }
 
 .u-ml15 {
-  margin: 15px !important; }
+  margin-left: 15px !important; }
 
 .u-p15 {
   margin: 15px !important; }
 
 .u-pt15 {
-  margin: 15px !important; }
+  margin-top: 15px !important; }
 
 .u-pr15 {
-  margin: 15px !important; }
+  margin-right: 15px !important; }
 
 .u-pb15 {
-  margin: 15px !important; }
+  margin-bottom: 15px !important; }
 
 .u-pl15 {
-  margin: 15px !important; }
+  margin-left: 15px !important; }
 
 .u-m20 {
   margin: 20px !important; }
 
 .u-mt20 {
-  margin: 20px !important; }
+  margin-top: 20px !important; }
 
 .u-mr20 {
-  margin: 20px !important; }
+  margin-right: 20px !important; }
 
 .u-mb20 {
-  margin: 20px !important; }
+  margin-bottom: 20px !important; }
 
 .u-ml20 {
-  margin: 20px !important; }
+  margin-left: 20px !important; }
 
 .u-p20 {
   margin: 20px !important; }
 
 .u-pt20 {
-  margin: 20px !important; }
+  margin-top: 20px !important; }
 
 .u-pr20 {
-  margin: 20px !important; }
+  margin-right: 20px !important; }
 
 .u-pb20 {
-  margin: 20px !important; }
+  margin-bottom: 20px !important; }
 
 .u-pl20 {
-  margin: 20px !important; }
+  margin-left: 20px !important; }
 
 .u-m25 {
   margin: 25px !important; }
 
 .u-mt25 {
-  margin: 25px !important; }
+  margin-top: 25px !important; }
 
 .u-mr25 {
-  margin: 25px !important; }
+  margin-right: 25px !important; }
 
 .u-mb25 {
-  margin: 25px !important; }
+  margin-bottom: 25px !important; }
 
 .u-ml25 {
-  margin: 25px !important; }
+  margin-left: 25px !important; }
 
 .u-p25 {
   margin: 25px !important; }
 
 .u-pt25 {
-  margin: 25px !important; }
+  margin-top: 25px !important; }
 
 .u-pr25 {
-  margin: 25px !important; }
+  margin-right: 25px !important; }
 
 .u-pb25 {
-  margin: 25px !important; }
+  margin-bottom: 25px !important; }
 
 .u-pl25 {
-  margin: 25px !important; }
+  margin-left: 25px !important; }
 
 .u-m30 {
   margin: 30px !important; }
 
 .u-mt30 {
-  margin: 30px !important; }
+  margin-top: 30px !important; }
 
 .u-mr30 {
-  margin: 30px !important; }
+  margin-right: 30px !important; }
 
 .u-mb30 {
-  margin: 30px !important; }
+  margin-bottom: 30px !important; }
 
 .u-ml30 {
-  margin: 30px !important; }
+  margin-left: 30px !important; }
 
 .u-p30 {
   margin: 30px !important; }
 
 .u-pt30 {
-  margin: 30px !important; }
+  margin-top: 30px !important; }
 
 .u-pr30 {
-  margin: 30px !important; }
+  margin-right: 30px !important; }
 
 .u-pb30 {
-  margin: 30px !important; }
+  margin-bottom: 30px !important; }
 
 .u-pl30 {
-  margin: 30px !important; }
+  margin-left: 30px !important; }
 
 /* FontSize */
 .u-fs-m {
@@ -624,5 +675,8 @@ $spritesheet: width height image $spritesheet-sprites;
 
 .row .col li:first-child {
   margin-top: 0; }
+
+.border {
+  border: 1px solid #000; }
 
 /*# sourceMappingURL=app.css.map */

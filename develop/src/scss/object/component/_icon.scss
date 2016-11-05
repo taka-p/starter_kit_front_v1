@@ -10,13 +10,36 @@
   @include r-sprite($github);
   display: block;
 }
-// svgスプライトのテスト
-.c-ico__arrow__up {
-  fill: pink;
+
+// svgスプライト(fragment Identifier ver)のテスト
+.c-ico__svg__fragment {
+  width: 150px;
+  fill: crimson;
 }
-.c-ico__arrow__up__svg {
-  display: block;
-  width: 300px;
-  height: 300px;
-  background: url(../img/svg/test_2.svg#apple_css);
+
+// svgスプライト(fragment Identifier & background-image ver)のテスト
+.c-ico__svg__fragment--background-image {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  &.apple {
+    background-image: url("../img/svg_sprite_flag/test_2.svg#apple_flag");
+  }
+  &.cherry {
+    background-image: url("../img/svg_sprite_flag/test_2.svg#cherry_flag");
+  }
+  &.peach {
+    background-image: url("../img/svg_sprite_flag/test_2.svg#peach_flag");
+  }
+}
+
+// svgスプライト(background-image ver)のテスト
+.c-ico__svg__background-potision--apple {
+  @include svg-sprite($svg-test_2, apple, all, 5);
+}
+.c-ico__svg__background-potision--cherry {
+  @include svg-sprite($svg-test_2, cherry, all, 5);
+}
+.c-ico__svg__background-potision--peach {
+  @include svg-sprite($svg-test_2, peach, all, 5);
 }

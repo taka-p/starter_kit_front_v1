@@ -8,41 +8,107 @@
     <script src="js/app.js"></script>
 </head>
 <body>
-    <div id="dom"></div>
-    <i class="c-ico__github"></i>
+    <div id="dom" class="u-dn"></div>
+    <!--<i class="c-ico__github"></i>-->
 
-    <div class="row">
-        <div class="col">
-            <label for="">アカウントを作成</label>
-        </div>
-        <div class="col">
-            <input type="text" placeholder="4文字以上8文字以内で入力してください" data-minlength="4" data-maxlength="8" required>
-            <ul>
-                <li data-error="required">必須項目です</li>
-                <li data-error="minlength">4文字以上で入力してください</li>
-                <li data-error="maxlength">8文字以内で入力してください</li>
-            </ul>
+    <!--<div class="row">-->
+        <!--<div class="col">-->
+            <!--<label for="">アカウントを作成</label>-->
+        <!--</div>-->
+        <!--<div class="col">-->
+            <!--<input type="text" placeholder="4文字以上8文字以内で入力してください" data-minlength="4" data-maxlength="8" required>-->
+            <!--<ul>-->
+                <!--<li data-error="required">必須項目です</li>-->
+                <!--<li data-error="minlength">4文字以上で入力してください</li>-->
+                <!--<li data-error="maxlength">8文字以内で入力してください</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="row">-->
+        <!--<div class="col">-->
+            <!--<label for="">パスワードを作成</label>-->
+        <!--</div>-->
+        <!--<div class="col">-->
+            <!--<input type="text" placeholder="4文字以上8文字以内で入力してください" data-minlength="4" data-maxlength="8" required>-->
+            <!--<ul>-->
+                <!--<li data-error="required">必須項目です</li>-->
+                <!--<li data-error="minlength">4文字以上で入力してください</li>-->
+                <!--<li data-error="maxlength">8文字以内で入力してください</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+    <div class="u-m30">
+        <h2 class="u-fwb u-fs-l3 u-mb10">svgテスト</h2>
+        <div class="u-m10">
+            <div class="u-m20 border u-dib u-vat">
+                <h3 class="u-fwb u-fs-l1">imgタグver</h3>
+                <ul>
+                    <li>
+                        <img src="img/svg_sprite_flag/test_2.svg#apple_flag" width="150">
+                    </li>
+                    <li>
+                        <img src="img/svg_sprite_flag/test_2.svg#cherry_flag" width="150">
+                    </li>
+                    <li>
+                        <img src="img/svg_sprite_flag/test_2.svg#peach_flag" width="150">
+                    </li>
+                </ul>
+            </div>
+
+            <div class="u-m20 border u-dib u-vat">
+                <h3 class="u-fwb u-fs-l1 u-mb10">svgタグver</h3>
+                <ul>
+                    <li>
+                        <svg role="image" class="c-ico__svg__fragment">
+                            <use xlink:href="img/svg_sprite_flag/test_2.svg#apple" />
+                        </svg>
+                    </li>
+                    <li>
+                        <svg role="image" class="c-ico__svg__fragment">
+                            <use xlink:href="img/svg_sprite_flag/test_2.svg#cherry" />
+                        </svg>
+                    </li>
+                    <li>
+                        <svg role="image" class="c-ico__svg__fragment">
+                            <use xlink:href="img/svg_sprite_flag/test_2.svg#peach" />
+                        </svg>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="u-m20 border u-dib u-vat">
+                <h3 class="u-fwb u-fs-l1 u-mb10">css(fragment)ver</h3>
+                <ul>
+                    <li>
+                        <div class="c-ico__svg__fragment--background-image apple"></div>
+                    </li>
+                    <li>
+                        <div class="c-ico__svg__fragment--background-image cherry"></div>
+                    </li>
+                    <li>
+                        <div class="c-ico__svg__fragment--background-image peach"></div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="u-m20 border u-dib u-vat">
+                <h3 class="u-fwb u-fs-l1 u-mb10">css(position)ver</h3>
+                <ul>
+                    <li>
+                        <div class="c-ico__svg__background-potision--apple"></div>
+                    </li>
+                    <li>
+                        <div class="c-ico__svg__background-potision--cherry"></div>
+                    </li>
+                    <li>
+                        <div class="c-ico__svg__background-potision--peach"></div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col">
-            <label for="">パスワードを作成</label>
-        </div>
-        <div class="col">
-            <input type="text" placeholder="4文字以上8文字以内で入力してください" data-minlength="4" data-maxlength="8" required>
-            <ul>
-                <li data-error="required">必須項目です</li>
-                <li data-error="minlength">4文字以上で入力してください</li>
-                <li data-error="maxlength">8文字以内で入力してください</li>
-            </ul>
-        </div>
-    </div>
-
-    <svg role="image" class="c-ico__arrow__up">
-        <use xlink:href="img/svg/test_2.svg#peach" />
-    </svg>
-
-    <div class="c-ico__arrow__up__svg"></div>
 </body>
 </html>

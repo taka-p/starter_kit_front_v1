@@ -1,0 +1,36 @@
+/**
+ * template/_svg_sprite.scss
+ * SVGスプライト画像読込用のプロパティ群を定義
+ */
+
+$svg-test: (
+  sprite: (
+    width  : 128px,
+    height : 128px,
+    svgPath: "../img/svg_sprite/" + test + ".svg"
+  ),
+    svg_1: (
+      width      : 32px,
+      height     : 32px,
+      backgroundX: 0px,
+      backgroundY: 0px
+    ),
+    svg_2: (
+      width      : 32px,
+      height     : 32px,
+      backgroundX: -32px,
+      backgroundY: -32px
+    ),
+    svg_3: (
+      width      : 32px,
+      height     : 32px,
+      backgroundX: -64px,
+      backgroundY: -64px
+    ),
+    svg_4: (
+      width      : 32px,
+      height     : 32px,
+      backgroundX: -96px,
+      backgroundY: -96px
+    ),
+);
