@@ -679,4 +679,18 @@ $spritesheet: width height image $spritesheet-sprites;
 .border {
   border: 1px solid #000; }
 
+.c-svg__list__item {
+  width: 250px;
+  text-align: center; }
+
+.c-svg__list__title {
+  padding: 10px 0;
+  border-bottom: 1px solid #555;
+  margin-bottom: 15px;
+  background: #555;
+  color: #fff; }
+
+.u-fill-crimson {
+  fill: crimson; }
+
 /*# sourceMappingURL=app.css.map */
