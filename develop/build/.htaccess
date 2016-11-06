@@ -1,0 +1,17 @@
+# svgzの展開テスト
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{HTTP:Accept-Encoding} gzip
+    RewriteCond %{REQUEST_FILENAME} \.(svg)$
+    RewriteCond %{REQUEST_FILENAME} !\.svgz$
+    RewriteCond %{REQUEST_FILENAME}\.svgz -s
+    RewriteRule .+ %{REQUEST_URI}.svgz [L]
+
+    <FilesMatch "\.html\.gz$">
+        ForceType   image/svg+xml .svg .svgz
+        AddEncoding gzip .svgz
+    </FilesMatch>
+
+    Header append Vary Accept-Encoding env=!dont-vary
+</IfModule>

@@ -25,9 +25,10 @@ import cssnano      from 'cssnano';
 /* img plugin */
 import imagemin    from 'gulp-imagemin';
 import spritesmith from 'gulp.spritesmith';
-import svgmin      from 'gulp-svgmin';
+import svgo        from 'gulp-svgo';
+import svg2z       from 'gulp-svg2z';
 import svgstore    from 'gulp-svgstore';
-import svgSprite    from 'gulp-svg-sprite';
+import svgsprite    from 'gulp-svg-sprite';
 import cheerio     from 'gulp-cheerio';
 import iconfont    from 'gulp-iconfont';
 import iconfontCss from 'gulp-iconfont-css';
@@ -186,10 +187,10 @@ gulp.task('cssProdGzip', () => {
 
 gulp.task('imgProd', () => {
     const srcGlob = conf.imgSrcDir + '/**/*.+(jpg|jpeg|png|gif|svg)',
-        dstGlob = conf.imgDestDirProd,
-        imageminOptions = {
+          dstGlob = conf.imgDestDirProd,
+          imageminOptions = {
             optimizationLevel: 7
-        };
+          };
 
     gulp.src(srcGlob)
         .pipe(imagemin(imageminOptions))
@@ -205,6 +206,19 @@ gulp.task('htmlProdGzip', () => {
         .pipe(gulpif(true, gzip()))
         .pipe(gulp.dest('./product'))
         .pipe(notify('HtmlGzip Finished'));
+});
+
+gulp.task('svgProdGzip', () => {
+    const srcGlob = conf.imgSrcDir + '/**/*.svg',
+          dstGlob = conf.imgDestDirProd;
+
+    gulp.src(srcGlob)
+        .pipe(plumber({
+            errorHandler: notify.onError(`<%= error.plugin %>\n<%= error.message %>`)
+        }))
+        .pipe(svg2z())
+        .pipe(gulp.dest(dstGlob))
+        .pipe(notify('svgGzip Finished'));
 });
 
 gulp.task('cleanProd', del.bind(null,
@@ -277,8 +291,8 @@ gulp.task('svg_sprite', function () {
             destHtmlTmp = `../../../../develop/build/img/svg_sprite/${folder}/svg_sample.html`;
 
         return gulp.src(srcSvg)
-            .pipe(svgmin())
-            .pipe(svgSprite({
+            .pipe(svgo())
+            .pipe(svgsprite({
                 shape: {
                     dimension: {
                         maxWidth : 32,
@@ -310,6 +324,8 @@ gulp.task('svg_sprite', function () {
                     dirname: folder
                 }
             }))
+            .pipe(gulp.dest(conf.svgBaseDir))
+            .pipe(svg2z())
             .pipe(gulp.dest(conf.svgBaseDir));
     })
 });
@@ -330,7 +346,7 @@ gulp.task('svg_sprite_flag', () => {
               templateDestGlob = baseDir + '/' + folder;
 
         gulp.src(srcGlob, {base: baseDir})
-            .pipe(svgmin())
+            .pipe(svgo())
             .pipe(svgstore({inlineSvg: true}))
             .pipe(cheerio({
                 run: ($, file) => {

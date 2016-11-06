@@ -61,16 +61,37 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	window.onload = function () {
-	  var dom = _alias2.default.getId('dom');
-	  dom.innerHTML = 'Hello World!';
-	  var $dom = dom;
-	  console.log($dom);
+	  var $rootApp = (0, _jquery2.default)('#rootApp');
 
-	  var listEach = [].forEach.bind(_alias2.default.getTag('input'));
-	  listEach(function (item) {
-	    new _validation2.default(item);
+	  _jquery2.default.ajax({
+	    type: 'GET',
+	    url: './html/partial/_svg_sprite_test.html',
+	    dataType: 'html',
+	    async: false
+	  }).done(function (data) {
+	    $rootApp.html(data);
+
+	    new _jquery2.default.Deferred().resolve().promise().then(function () {
+	      var rootName = $rootApp.find('#rootSub').attr('data-root-name');
+
+	      switch (rootName) {
+	        case 'validationTest':
+	          var listEach = [].forEach.bind(_alias2.default.getTag('input'));
+	          listEach(function (item) {
+	            new _validation2.default(item);
+	          });
+	          // [].forEach().apply(Al.getTag('input'));
+
+	          break;
+	        case 'spriteTest':
+	          break;
+	        case 'svgSpriteTest':
+	          break;
+	        default:
+	          break;
+	      }
+	    });
 	  });
-	  // [].forEach().apply(Al.getTag('input'));
 	};
 
 /***/ },
