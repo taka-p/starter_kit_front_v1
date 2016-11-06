@@ -63,8 +63,7 @@
 	window.onload = function () {
 	  var $rootApp = (0, _jquery2.default)('#rootApp');
 
-	  $rootApp.load('./html/partial/_svg_sprite_test.html');
-
+	  // $rootApp.load('./html/partial/_svg_sprite_test.html');
 	  // $.ajax({
 	  //   type    : 'GET',
 	  //   url     : './html/partial/_svg_sprite_test.html',

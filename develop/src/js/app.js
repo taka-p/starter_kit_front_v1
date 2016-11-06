@@ -5,8 +5,7 @@ import $     from '../../../bower_components/jquery/dist/jquery.min';
 window.onload = () => {
   const $rootApp  = $('#rootApp');
 
-  $rootApp.load('./html/partial/_svg_sprite_test.html');
-
+  // $rootApp.load('./html/partial/_svg_sprite_test.html');
   // $.ajax({
   //   type    : 'GET',
   //   url     : './html/partial/_svg_sprite_test.html',
